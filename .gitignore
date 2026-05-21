@@ -11,3 +11,8 @@ next-env.d.ts
 
 # Local IDE / agent settings
 .claude/settings.local.json
+
+# Local deploy credentials (never commit)
+.deploy.env
+.deploy.env.local
+deploy/*.local.*
