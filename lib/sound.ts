@@ -44,14 +44,17 @@ function ensureCtx(): boolean {
       (window as any).AudioContext || (window as any).webkitAudioContext;
     if (!AC) return false;
     try {
-      ctx = new AC();
-      master = ctx.createGain();
-      master.gain.value = isSoundEnabled() ? 0.18 : 0;
-      master.connect(ctx.destination);
+      const c: AudioContext = new AC();
+      const m = c.createGain();
+      m.gain.value = isSoundEnabled() ? 0.18 : 0;
+      m.connect(c.destination);
+      ctx = c;
+      master = m;
     } catch {
       return false;
     }
   }
+  if (!ctx) return false;
   // Resume if autoplay policy suspended it (must be inside a user gesture).
   if (ctx.state === 'suspended') {
     ctx.resume().catch(() => {});
