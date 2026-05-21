@@ -36,6 +36,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-cairo)', 'system-ui', 'sans-serif'],
         display: ['var(--font-rakkas)', 'serif'],
+        gothic: ['var(--font-cinzel)', 'serif'],
         mono: ['var(--font-jetbrains)', 'monospace']
       },
       boxShadow: {

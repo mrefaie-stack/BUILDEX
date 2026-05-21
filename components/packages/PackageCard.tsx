@@ -6,6 +6,9 @@ import type { Package } from '@/lib/types';
 import { useArsenalStore } from '@/lib/store';
 import { trackEvent } from '@/lib/tracking';
 import { formatCurrency, cn } from '@/lib/utils';
+import { Tilt } from '@/components/effects/Tilt';
+import { burstAtElement } from '@/components/effects/Confetti';
+import { playSound } from '@/lib/sound';
 
 interface Props {
   pkg: Package;
@@ -18,19 +21,29 @@ export function PackageCard({ pkg, index }: Props) {
   const current = useArsenalStore((s) => s.selectedPackage);
   const isSelected = current === pkg.id;
 
-  const choose = () => {
+  const choose = (e: React.MouseEvent<HTMLButtonElement>) => {
     setPackage(pkg.id);
+    playSound('confirm');
+    burstAtElement(e.currentTarget, {
+      count: 70,
+      spread: 110,
+      power: 9,
+      colors: pkg.popular
+        ? ['#00D1FF', '#E6B450', '#FFFFFF']
+        : ['#00D1FF', '#FFFFFF']
+    });
     trackEvent('selected_package', { metadata: { package: pkg.id } });
-    router.push(`/booking?package=${pkg.id}`);
+    setTimeout(() => router.push(`/booking?package=${pkg.id}`), 350);
   };
 
   return (
+    <Tilt max={pkg.popular ? 7 : 5} scale={1.015} glare>
     <motion.div
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.55, delay: index * 0.1 }}
-      whileHover={{ y: -4 }}
+      onMouseEnter={() => playSound('hover')}
       className={cn(
         'relative surface rounded-2xl p-6 md:p-7 transition',
         pkg.popular && 'surface-glow border-accent/40'
@@ -89,13 +102,14 @@ export function PackageCard({ pkg, index }: Props) {
       <button
         onClick={choose}
         className={cn(
-          'w-full',
-          pkg.popular ? 'btn-primary' : 'btn-ghost',
+          'w-full justify-center',
+          pkg.popular ? 'btn-neon' : 'btn-ghost',
           isSelected && 'btn-gold'
         )}
       >
         {isSelected ? '✓ مختارة — تابع للحجز' : pkg.ctaLabel}
       </button>
     </motion.div>
+    </Tilt>
   );
 }

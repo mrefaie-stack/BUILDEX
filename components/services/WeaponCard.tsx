@@ -5,6 +5,8 @@ import type { Weapon } from '@/lib/types';
 import { WeaponIcon } from './WeaponIcon';
 import { useArsenalStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
+import { Tilt } from '@/components/effects/Tilt';
+import { playSound } from '@/lib/sound';
 
 interface Props {
   weapon: Weapon;
@@ -28,14 +30,19 @@ export function WeaponCard({ weapon, index, onOpen }: Props) {
   const accent = weapon.accent ?? 'cyan';
 
   return (
+    <Tilt max={6} scale={1.02} glare>
     <motion.button
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.3 }}
       transition={{ duration: 0.55, delay: index * 0.07 }}
       whileHover={{ y: -4 }}
-      onClick={onOpen}
-      className="group relative text-right surface rounded-2xl p-6 overflow-hidden transition"
+      onClick={() => {
+        playSound('open');
+        onOpen();
+      }}
+      onMouseEnter={() => playSound('hover')}
+      className="group relative w-full text-right surface rounded-2xl p-6 overflow-hidden transition"
     >
       <div
         className={cn(
@@ -77,5 +84,6 @@ export function WeaponCard({ weapon, index, onOpen }: Props) {
         </span>
       </div>
     </motion.button>
+    </Tilt>
   );
 }

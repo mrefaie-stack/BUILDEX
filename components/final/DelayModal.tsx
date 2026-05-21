@@ -1,7 +1,9 @@
 'use client';
 
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { playSound } from '@/lib/sound';
 
 interface Props {
   open: boolean;
@@ -10,6 +12,9 @@ interface Props {
 
 export function DelayModal({ open, onClose }: Props) {
   const router = useRouter();
+  useEffect(() => {
+    if (open) playSound('warn');
+  }, [open]);
   return (
     <AnimatePresence>
       {open && (

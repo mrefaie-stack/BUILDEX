@@ -107,6 +107,72 @@ body {
   box-shadow: 0 0 0 1px rgba(0,209,255,0.45), 0 24px 60px -16px rgba(0,209,255,0.75);
 }
 
+/* Cinematic neon CTA — electric border, glowing outer, dark inside.
+   Matches the "نعم، أريد أن أسيطر على السوق" button in the reference. */
+.btn-neon {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.05rem 2rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(0,209,255,0.18), rgba(0,90,160,0.10)),
+    #04111E;
+  color: #F5FBFF;
+  border: 1.5px solid rgba(0,209,255,0.55);
+  box-shadow:
+    inset 0 0 18px rgba(0,209,255,0.28),
+    0 0 1px rgba(0,209,255,0.6),
+    0 0 22px rgba(0,209,255,0.45),
+    0 0 64px -8px rgba(0,209,255,0.75);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .2s ease;
+}
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(180,230,255,0.85), rgba(0,209,255,0.3) 50%, rgba(60,140,255,0.85));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+.btn-neon:hover {
+  transform: translateY(-1px);
+  border-color: rgba(0,209,255,0.95);
+  box-shadow:
+    inset 0 0 24px rgba(0,209,255,0.40),
+    0 0 1px rgba(0,209,255,0.8),
+    0 0 32px rgba(0,209,255,0.65),
+    0 0 96px -8px rgba(0,209,255,0.95);
+}
+.btn-neon-dim {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.05rem 2rem;
+  font-weight: 600;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.025);
+  color: #C7D0DE;
+  border: 1.5px solid rgba(255,255,255,0.12);
+  transition: all .25s ease;
+}
+.btn-neon-dim:hover {
+  border-color: rgba(255,255,255,0.32);
+  background: rgba(255,255,255,0.05);
+  color: #FFFFFF;
+}
+
 .btn-ghost {
   display: inline-flex;
   align-items: center;

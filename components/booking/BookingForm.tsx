@@ -8,6 +8,8 @@ import { bookingSchema } from '@/lib/validation';
 import { useArsenalStore } from '@/lib/store';
 import { trackEvent } from '@/lib/tracking';
 import { buildWaLink } from '@/lib/utils';
+import { playSound } from '@/lib/sound';
+import { burstAtCenter } from '@/components/effects/Confetti';
 
 const COMPANY_TYPES = [
   { value: 'مقاولات', label: 'مقاولات' },
@@ -112,7 +114,14 @@ export function BookingForm() {
         }
       });
       setSubmitted(true);
-      router.push('/confirmation');
+      playSound('success');
+      burstAtCenter({
+        count: 140,
+        spread: 160,
+        power: 11,
+        colors: ['#00D1FF', '#E6B450', '#FFFFFF', '#FF8A3D']
+      });
+      setTimeout(() => router.push('/confirmation'), 400);
     } catch {
       setBusy(false);
     }

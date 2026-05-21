@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useArsenalStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
+import { SoundToggle } from '@/components/effects/SoundToggle';
 
 const NAV = [
   { href: '/level-1', label: 'من نحن' },
@@ -81,6 +82,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ArsenalCounterPill count={weapons.length} />
+          <SoundToggle />
           <Link href="/booking" className="btn-primary !py-2 !px-4 !text-sm">
             ابدأ المعركة
           </Link>

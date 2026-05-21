@@ -8,6 +8,7 @@ import { finalLeadSchema } from '@/lib/validation';
 import { trackEvent } from '@/lib/tracking';
 import { useArsenalStore } from '@/lib/store';
 import { useRouter } from 'next/navigation';
+import { playSound } from '@/lib/sound';
 
 export function ExitIntentModal() {
   const [open, setOpen] = useState(false);
@@ -34,6 +35,7 @@ export function ExitIntentModal() {
       if (e.clientY <= 4) {
         setOpen(true);
         setShownOnce(true);
+        playSound('warn');
         trackEvent('exit_intent_shown');
         document.removeEventListener('mouseleave', onLeave);
       }

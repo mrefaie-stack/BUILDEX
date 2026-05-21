@@ -6,6 +6,8 @@ import type { Weapon } from '@/lib/types';
 import { useArsenalStore } from '@/lib/store';
 import { trackEvent } from '@/lib/tracking';
 import { WeaponIcon } from './WeaponIcon';
+import { burstAtElement } from '@/components/effects/Confetti';
+import { playSound } from '@/lib/sound';
 
 interface Props {
   weapon: Weapon | null;
@@ -113,6 +115,7 @@ export function WeaponDetailDrawer({ weapon, onClose, onAdded }: Props) {
                 <button
                   onClick={() => {
                     removeWeapon(weapon.id);
+                    playSound('deny');
                     trackEvent('removed_weapon_from_arsenal', {
                       metadata: { id: weapon.id }
                     });
@@ -123,14 +126,21 @@ export function WeaponDetailDrawer({ weapon, onClose, onAdded }: Props) {
                 </button>
               ) : (
                 <button
-                  onClick={() => {
+                  onClick={(e) => {
                     addWeapon(weapon.id);
+                    playSound('select');
+                    burstAtElement(e.currentTarget, {
+                      count: 50,
+                      spread: 100,
+                      power: 7,
+                      colors: ['#00D1FF', '#E6B450', '#FFFFFF']
+                    });
                     trackEvent('added_weapon_to_arsenal', {
                       metadata: { id: weapon.id }
                     });
                     onAdded?.();
                   }}
-                  className="btn-primary w-full"
+                  className="btn-neon w-full justify-center"
                 >
                   أضف إلى ترسانتي
                 </button>

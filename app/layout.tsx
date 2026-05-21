@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from 'next';
-import { Cairo, Rakkas, JetBrains_Mono } from 'next/font/google';
+import { Cairo, Rakkas, JetBrains_Mono, Cinzel } from 'next/font/google';
 import './globals.css';
 import { AnalyticsProvider } from '@/components/tracking/AnalyticsProvider';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { CookieBanner } from '@/components/layout/CookieBanner';
 import { BgEffects } from '@/components/layout/BgEffects';
+import { CursorSpotlight } from '@/components/effects/CursorSpotlight';
+import { SoundProvider } from '@/components/effects/SoundProvider';
 
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
@@ -18,6 +20,13 @@ const rakkas = Rakkas({
   subsets: ['arabic', 'latin'],
   weight: ['400'],
   variable: '--font-rakkas',
+  display: 'swap'
+});
+
+const cinzel = Cinzel({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700', '800', '900'],
+  variable: '--font-cinzel',
   display: 'swap'
 });
 
@@ -62,11 +71,13 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${cairo.variable} ${rakkas.variable} ${jetbrains.variable}`}
+      className={`${cairo.variable} ${rakkas.variable} ${cinzel.variable} ${jetbrains.variable}`}
     >
       <body className="font-sans antialiased">
         <AnalyticsProvider>
+          <SoundProvider />
           <BgEffects />
+          <CursorSpotlight />
           <Header />
           <main className="relative z-10">{children}</main>
           <Footer />

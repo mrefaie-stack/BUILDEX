@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { useArsenalStore } from '@/lib/store';
 import { useTrackPage } from '@/lib/hooks';
@@ -9,9 +10,24 @@ import weaponsJson from '@/data/weapons.json';
 import type { Package, Weapon } from '@/lib/types';
 import { trackEvent } from '@/lib/tracking';
 import { buildWaLink } from '@/lib/utils';
+import { playSound } from '@/lib/sound';
+import { burstAtCenter } from '@/components/effects/Confetti';
 
 export default function ConfirmationPage() {
   useTrackPage('visited_confirmation', 'confirmation');
+  useEffect(() => {
+    playSound('success');
+    burstAtCenter({
+      count: 180,
+      spread: 180,
+      power: 12,
+      colors: ['#00D1FF', '#E6B450', '#FFFFFF', '#FF8A3D', '#10B981']
+    });
+    const t = setTimeout(() => {
+      burstAtCenter({ count: 80, spread: 150, power: 9 });
+    }, 600);
+    return () => clearTimeout(t);
+  }, []);
   const pkgId = useArsenalStore((s) => s.selectedPackage);
   const weapons = useArsenalStore((s) => s.selectedWeapons);
   const lead = useArsenalStore((s) => s.leadData);

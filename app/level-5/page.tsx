@@ -13,6 +13,8 @@ import { ArsenalLeadModal } from '@/components/services/ArsenalLeadModal';
 import { useTrackPage } from '@/lib/hooks';
 import { trackEvent } from '@/lib/tracking';
 import { useArsenalStore } from '@/lib/store';
+import { Magnetic } from '@/components/effects/Magnetic';
+import { playSound } from '@/lib/sound';
 
 export default function Level5() {
   useTrackPage('visited_level_5', 'level-5');
@@ -92,13 +94,19 @@ export default function Level5() {
               <h3 className="font-display text-xl text-gradient mb-3">
                 اتخذ القرار الآن
               </h3>
-              <Link
-                href="/booking"
-                onClick={() => trackEvent('clicked_final_cta')}
-                className="btn-primary w-full"
-              >
-                ابدأ معركتك ←
-              </Link>
+              <Magnetic strength={0.2} radius={120}>
+                <Link
+                  href="/booking"
+                  onClick={() => {
+                    trackEvent('clicked_final_cta');
+                    playSound('confirm');
+                  }}
+                  onMouseEnter={() => playSound('hover')}
+                  className="btn-neon w-full justify-center"
+                >
+                  ابدأ معركتك ←
+                </Link>
+              </Magnetic>
               <button
                 onClick={() => {
                   setDelayOpen(true);
