@@ -1,4 +1,4 @@
-import type { ReactNode } from 'next';
+import type { ReactNode } from 'react';
 import { Cairo, JetBrains_Mono } from 'next/font/google';
 
 const cairo = Cairo({
