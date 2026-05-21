@@ -15,4 +15,5 @@ next-env.d.ts
 # Local deploy credentials (never commit)
 .deploy.env
 .deploy.env.local
+.deploy-once.js
 deploy/*.local.*
