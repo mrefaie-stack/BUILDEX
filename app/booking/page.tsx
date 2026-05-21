@@ -1,0 +1,55 @@
+'use client';
+
+import { Suspense } from 'react';
+import { LevelHeader } from '@/components/layout/LevelHeader';
+import { BookingForm } from '@/components/booking/BookingForm';
+import { CalendarEmbed } from '@/components/booking/CalendarEmbed';
+import { useTrackPage } from '@/lib/hooks';
+
+export default function BookingPage() {
+  useTrackPage('visited_booking', 'booking');
+  return (
+    <div className="relative">
+      <LevelHeader
+        level="LEVEL 06 / الحجز"
+        title="ابدأ معركتك الآن"
+        subtitle="املأ البيانات وسيتم التواصل معك لتحديد أفضل خطة لشركتك."
+      />
+
+      <section className="section">
+        <div className="container-tight grid gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <Suspense fallback={<div className="surface rounded-2xl p-8">...</div>}>
+              <BookingForm />
+            </Suspense>
+          </div>
+          <div className="space-y-6">
+            <div className="surface rounded-2xl p-6">
+              <div className="font-mono text-[11px] tracking-widest text-accent uppercase mb-3">
+                MISSION_BRIEF
+              </div>
+              <ul className="space-y-3 text-sm text-ink">
+                <Item>تواصل مباشر مع قائد الفريق خلال 24 ساعة</Item>
+                <Item>جلسة تشخيص مجانية لمدة 45 دقيقة</Item>
+                <Item>عرض مخصص بناءً على ترسانتك</Item>
+                <Item>التزام كامل بالخصوصية والسرية</Item>
+              </ul>
+            </div>
+            <CalendarEmbed />
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function Item({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="flex items-start gap-2">
+      <span className="mt-1 grid h-4 w-4 place-items-center rounded-full bg-accent/20 text-accent text-[10px]">
+        ✓
+      </span>
+      <span className="text-ink-muted">{children}</span>
+    </li>
+  );
+}
