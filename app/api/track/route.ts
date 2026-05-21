@@ -23,15 +23,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, stored: false });
     }
 
-    const { error } = await supa.from('visitor_events').insert({
-      visitor_id,
-      event_name,
-      page: page ?? null,
-      metadata: metadata ?? null
-    });
-
-    if (error) {
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    try {
+      const { error } = await supa.from('visitor_events').insert({
+        visitor_id,
+        event_name,
+        page: page ?? null,
+        metadata: metadata ?? null
+      });
+      if (error) {
+        // Don't surface tracking errors to the client — they should never
+        // affect UX.
+        return NextResponse.json({ ok: true, stored: false });
+      }
+    } catch {
+      return NextResponse.json({ ok: true, stored: false });
     }
     return NextResponse.json({ ok: true });
   } catch (e: any) {

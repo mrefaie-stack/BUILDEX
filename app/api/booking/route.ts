@@ -47,50 +47,61 @@ export async function POST(req: NextRequest) {
       .filter(Boolean)
       .join('\n');
 
-    // 1. Create the lead row
-    const { data: lead, error: leadErr } = await supa
-      .from('leads')
-      .insert({
-        visitor_id,
-        name: parsed.data.name,
-        phone: parsed.data.phone,
-        city: parsed.data.city ?? null,
-        company_type: parsed.data.company_type ?? null,
-        selected_package: parsed.data.selected_package ?? null,
-        selected_services: parsed.data.selected_services ?? null,
-        calculator_result: parsed.data.calculator_result ?? null,
-        source: parsed.data.source ?? 'booking-form',
-        message: composedMessage || null,
-        status: 'new'
-      })
-      .select('id')
-      .single();
+    try {
+      // 1. Create the lead row
+      const { data: lead, error: leadErr } = await supa
+        .from('leads')
+        .insert({
+          visitor_id,
+          name: parsed.data.name,
+          phone: parsed.data.phone,
+          city: parsed.data.city ?? null,
+          company_type: parsed.data.company_type ?? null,
+          selected_package: parsed.data.selected_package ?? null,
+          selected_services: parsed.data.selected_services ?? null,
+          calculator_result: parsed.data.calculator_result ?? null,
+          source: parsed.data.source ?? 'booking-form',
+          message: composedMessage || null,
+          status: 'new'
+        })
+        .select('id')
+        .single();
 
-    if (leadErr) {
-      return NextResponse.json({ ok: false, error: leadErr.message }, { status: 500 });
+      if (leadErr) {
+        console.warn('[booking] lead insert failed:', leadErr.message);
+        return NextResponse.json({ ok: true, stored: false });
+      }
+
+      // 2. Create the booking row, linked to the lead
+      const { data: booking, error: bookErr } = await supa
+        .from('bookings')
+        .insert({
+          visitor_id,
+          lead_id: lead?.id ?? null,
+          name: parsed.data.name,
+          phone: parsed.data.phone,
+          city: parsed.data.city ?? null,
+          selected_package: parsed.data.selected_package ?? null,
+          selected_services: parsed.data.selected_services ?? null,
+          booking_source: parsed.data.source ?? 'booking-form'
+        })
+        .select('id')
+        .single();
+
+      if (bookErr) {
+        console.warn('[booking] booking insert failed:', bookErr.message);
+        return NextResponse.json({ ok: true, lead_id: lead?.id });
+      }
+
+      return NextResponse.json({
+        ok: true,
+        lead_id: lead?.id,
+        booking_id: booking?.id
+      });
+    } catch (netErr: any) {
+      console.warn('[booking] network error:', netErr?.message);
+      return NextResponse.json({ ok: true, stored: false });
     }
-
-    // 2. Create the booking row, linked to the lead
-    const { data: booking, error: bookErr } = await supa
-      .from('bookings')
-      .insert({
-        visitor_id,
-        lead_id: lead?.id ?? null,
-        name: parsed.data.name,
-        phone: parsed.data.phone,
-        city: parsed.data.city ?? null,
-        selected_package: parsed.data.selected_package ?? null,
-        selected_services: parsed.data.selected_services ?? null,
-        booking_source: parsed.data.source ?? 'booking-form'
-      })
-      .select('id')
-      .single();
-
-    if (bookErr) {
-      return NextResponse.json({ ok: false, error: bookErr.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ ok: true, lead_id: lead?.id, booking_id: booking?.id });
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: e?.message }, { status: 400 });
   }

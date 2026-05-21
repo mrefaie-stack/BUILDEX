@@ -40,28 +40,35 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, stored: false });
     }
 
-    const { data, error } = await supa
-      .from('leads')
-      .insert({
-        visitor_id,
-        name: parsed.data.name ?? null,
-        phone: parsed.data.phone,
-        city: parsed.data.city ?? null,
-        company_type: parsed.data.company_type ?? null,
-        selected_package: parsed.data.selected_package ?? null,
-        selected_services: parsed.data.selected_services ?? null,
-        calculator_result: parsed.data.calculator_result ?? null,
-        source: parsed.data.source ?? null,
-        message: parsed.data.message ?? null,
-        status: 'new'
-      })
-      .select('id')
-      .single();
+    try {
+      const { data, error } = await supa
+        .from('leads')
+        .insert({
+          visitor_id,
+          name: parsed.data.name ?? null,
+          phone: parsed.data.phone,
+          city: parsed.data.city ?? null,
+          company_type: parsed.data.company_type ?? null,
+          selected_package: parsed.data.selected_package ?? null,
+          selected_services: parsed.data.selected_services ?? null,
+          calculator_result: parsed.data.calculator_result ?? null,
+          source: parsed.data.source ?? null,
+          message: parsed.data.message ?? null,
+          status: 'new'
+        })
+        .select('id')
+        .single();
 
-    if (error) {
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+      if (error) {
+        console.warn('[lead] supabase error:', error.message);
+        // Still respond OK so the user-facing flow continues.
+        return NextResponse.json({ ok: true, stored: false });
+      }
+      return NextResponse.json({ ok: true, id: data?.id });
+    } catch (netErr: any) {
+      console.warn('[lead] network error:', netErr?.message);
+      return NextResponse.json({ ok: true, stored: false });
     }
-    return NextResponse.json({ ok: true, id: data?.id });
   } catch (e: any) {
     return NextResponse.json({ ok: false, error: e?.message }, { status: 400 });
   }

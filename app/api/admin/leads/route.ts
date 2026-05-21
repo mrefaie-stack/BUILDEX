@@ -13,13 +13,27 @@ export async function GET() {
   if (!supa) {
     return NextResponse.json({ ok: true, leads: [], configured: false });
   }
-  const { data, error } = await supa
-    .from('leads')
-    .select('*')
-    .order('created_at', { ascending: false })
-    .limit(500);
-  if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+  try {
+    const { data, error } = await supa
+      .from('leads')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(500);
+    if (error) {
+      return NextResponse.json(
+        { ok: false, error: error.message, configured: true },
+        { status: 500 }
+      );
+    }
+    return NextResponse.json({ ok: true, leads: data ?? [], configured: true });
+  } catch (e: any) {
+    // Network unreachable / DNS failure / placeholder host — treat as
+    // unconfigured rather than 500 so the admin UI stays usable.
+    return NextResponse.json({
+      ok: true,
+      leads: [],
+      configured: false,
+      transient: e?.message ?? 'unreachable'
+    });
   }
-  return NextResponse.json({ ok: true, leads: data ?? [], configured: true });
 }
