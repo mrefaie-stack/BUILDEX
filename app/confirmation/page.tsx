@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
+import { useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useArsenalStore } from '@/lib/store';
 import { useTrackPage } from '@/lib/hooks';
@@ -14,7 +15,21 @@ import { playSound } from '@/lib/sound';
 import { burstAtCenter } from '@/components/effects/Confetti';
 
 export default function ConfirmationPage() {
+  return (
+    <Suspense fallback={null}>
+      <ConfirmationInner />
+    </Suspense>
+  );
+}
+
+function ConfirmationInner() {
   useTrackPage('visited_confirmation', 'confirmation');
+  const sp = useSearchParams();
+  const meetingLabel = sp.get('m');
+  const pkgId = useArsenalStore((s) => s.selectedPackage);
+  const weapons = useArsenalStore((s) => s.selectedWeapons);
+  const lead = useArsenalStore((s) => s.leadData);
+
   useEffect(() => {
     playSound('success');
     burstAtCenter({
@@ -28,9 +43,6 @@ export default function ConfirmationPage() {
     }, 600);
     return () => clearTimeout(t);
   }, []);
-  const pkgId = useArsenalStore((s) => s.selectedPackage);
-  const weapons = useArsenalStore((s) => s.selectedWeapons);
-  const lead = useArsenalStore((s) => s.leadData);
 
   const pkg = (packagesJson.packages as Package[]).find((p) => p.id === pkgId);
   const chosenWeapons = (weaponsJson as Weapon[]).filter((w) =>
@@ -40,11 +52,10 @@ export default function ConfirmationPage() {
   const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '963000000000';
   const waLink = buildWaLink(
     waNumber,
-    `تم حجز معركتي مع MilaKnight. اسمي: ${lead.name || '...'} - الباقة: ${
+    `تم حجز معركتي مع BUILDEX. اسمي: ${lead.name || '...'} - الباقة: ${
       pkg?.name || 'مخصصة'
-    }`
+    }${meetingLabel ? ` - الموعد: ${meetingLabel}` : ''}`
   );
-  const calendarUrl = process.env.NEXT_PUBLIC_CALENDLY_URL;
 
   return (
     <div className="relative">
@@ -80,16 +91,36 @@ export default function ConfirmationPage() {
               تم استلام طلبك
             </h1>
             <p className="mt-4 text-ink-muted max-w-2xl mx-auto leading-relaxed">
-              فريق MilaKnight سيبدأ مراجعة بياناتك، وسيتم التواصل معك قريبًا
-              لتحديد الجلسة الأولى وتفعيل خطتك.
+              فريق BUILDEX سيبدأ مراجعة بياناتك، وسيتم التواصل معك قريبًا
+              لتأكيد الجلسة وتفعيل خطتك.
             </p>
           </motion.div>
+
+          {meetingLabel && (
+            <motion.div
+              initial={{ opacity: 0, y: 16, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.35 }}
+              className="mt-8 max-w-md mx-auto surface-elevated rounded-2xl p-6 surface-glow"
+            >
+              <div className="font-mono text-[10px] tracking-[0.4em] text-accent-gold uppercase mb-2">
+                MEETING_BOOKED
+              </div>
+              <div className="text-sm text-ink-muted mb-1">موعدك المحجوز</div>
+              <div className="font-display text-2xl text-gradient-gold">
+                {meetingLabel}
+              </div>
+              <div className="text-xs text-ink-muted mt-2">
+                مدة الجلسة 45 دقيقة · توقيت دمشق
+              </div>
+            </motion.div>
+          )}
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
-            className="mt-10 grid gap-6 md:grid-cols-2 max-w-3xl mx-auto text-right"
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="mt-8 grid gap-6 md:grid-cols-2 max-w-3xl mx-auto text-right"
           >
             <div className="surface rounded-2xl p-6">
               <div className="font-mono text-[10px] tracking-widest text-accent uppercase mb-2">
@@ -107,7 +138,9 @@ export default function ConfirmationPage() {
                 YOUR_ARSENAL
               </div>
               {chosenWeapons.length === 0 ? (
-                <div className="text-sm text-ink-muted">سنحدد ترسانتك معًا في الجلسة</div>
+                <div className="text-sm text-ink-muted">
+                  سنحدد ترسانتك معًا في الجلسة
+                </div>
               ) : (
                 <ul className="text-sm text-ink space-y-1">
                   {chosenWeapons.map((w) => (
@@ -124,7 +157,7 @@ export default function ConfirmationPage() {
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            transition={{ duration: 0.5, delay: 0.55 }}
             className="mt-10 flex flex-wrap items-center justify-center gap-3"
           >
             <a
@@ -136,17 +169,6 @@ export default function ConfirmationPage() {
             >
               تواصل عبر واتساب
             </a>
-            {calendarUrl && (
-              <a
-                href={calendarUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackEvent('booked_calendar_call', { force: true })}
-                className="btn-primary"
-              >
-                احجز جلسة من التقويم
-              </a>
-            )}
             <Link href="/" className="btn-ghost">
               العودة للموقع
             </Link>

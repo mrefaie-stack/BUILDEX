@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabaseService } from '@/lib/supabase';
+import { getDb, newId, jsonOrNull } from '@/lib/db';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -16,28 +16,17 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const supa = getSupabaseService();
-    if (!supa) {
-      // Soft no-op when Supabase is not configured — still return 200 so tracking
-      // never breaks the user-facing flow during local dev.
+    try {
+      const db = getDb();
+      db.prepare(
+        `INSERT INTO visitor_events (id, visitor_id, event_name, page, metadata)
+         VALUES (?, ?, ?, ?, ?)`
+      ).run(newId(), visitor_id, event_name, page ?? null, jsonOrNull(metadata));
+    } catch (e: any) {
+      console.warn('[track] insert failed:', e?.message);
       return NextResponse.json({ ok: true, stored: false });
     }
 
-    try {
-      const { error } = await supa.from('visitor_events').insert({
-        visitor_id,
-        event_name,
-        page: page ?? null,
-        metadata: metadata ?? null
-      });
-      if (error) {
-        // Don't surface tracking errors to the client — they should never
-        // affect UX.
-        return NextResponse.json({ ok: true, stored: false });
-      }
-    } catch {
-      return NextResponse.json({ ok: true, stored: false });
-    }
     return NextResponse.json({ ok: true });
   } catch (e: any) {
     return NextResponse.json(

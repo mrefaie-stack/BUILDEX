@@ -1,20 +1,28 @@
 'use client';
 
 import { useEffect } from 'react';
-import { unlockSound } from '@/lib/sound';
+import {
+  bindAmbientLifecycle,
+  isSoundEnabled,
+  startAmbient,
+  unlockSound
+} from '@/lib/sound';
 
 /**
  * Browsers block AudioContext until the user interacts. This component
  * mounts a one-shot listener that unlocks audio on the first pointer/key
- * event and then removes itself.
+ * event, kicks off the ambient music pad, and wires the page-visibility
+ * lifecycle so the music pauses when the tab is hidden.
  */
 export function SoundProvider() {
   useEffect(() => {
+    bindAmbientLifecycle();
     let done = false;
     const unlock = () => {
       if (done) return;
       done = true;
       unlockSound();
+      if (isSoundEnabled()) startAmbient();
       window.removeEventListener('pointerdown', unlock);
       window.removeEventListener('keydown', unlock);
       window.removeEventListener('touchstart', unlock);

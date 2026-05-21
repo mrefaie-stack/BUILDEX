@@ -260,3 +260,114 @@ export function playSound(name: SoundName) {
     /* ignore audio errors — never crash UI */
   }
 }
+
+// =============================================================
+// Ambient background pad — continuous, mute-aware, tab-aware.
+// =============================================================
+// Produces a slow-evolving minor-key drone using 5 detuned oscillators
+// run through a slowly-modulated low-pass filter. Pure synth — no audio
+// asset shipped.
+
+interface AmbientNodes {
+  out: GainNode;
+  oscillators: OscillatorNode[];
+  filter: BiquadFilterNode;
+  lfo: OscillatorNode;
+  lfoGain: GainNode;
+}
+
+let ambient: AmbientNodes | null = null;
+let ambientFade: 'in' | 'out' | 'idle' = 'idle';
+
+const PAD_TARGET_GAIN = 0.085; // very quiet — sits under foreground sounds
+
+const PAD_CHORD = [
+  // A2 root for a cinematic Am9 voicing
+  110.0, // A2 (root)
+  164.81, // E3 (fifth)
+  261.63, // C4 (minor third)
+  329.63, // E4 (octave fifth)
+  493.88 // B4 (ninth) — adds the cinematic shimmer
+];
+
+function buildAmbient(c: AudioContext, m: GainNode): AmbientNodes {
+  const out = c.createGain();
+  out.gain.value = 0;
+  out.connect(m);
+
+  const filter = c.createBiquadFilter();
+  filter.type = 'lowpass';
+  filter.frequency.value = 700;
+  filter.Q.value = 0.7;
+  filter.connect(out);
+
+  const lfo = c.createOscillator();
+  lfo.frequency.value = 0.06; // very slow sweep
+  const lfoGain = c.createGain();
+  lfoGain.gain.value = 400; // sweeps filter +/- 400 Hz
+  lfo.connect(lfoGain);
+  lfoGain.connect(filter.frequency);
+  lfo.start();
+
+  const oscillators: OscillatorNode[] = PAD_CHORD.flatMap((freq) => {
+    return [0, +5, -5].map((detune) => {
+      const osc = c.createOscillator();
+      osc.type = freq < 200 ? 'sawtooth' : 'triangle';
+      osc.frequency.value = freq;
+      osc.detune.value = detune;
+      const g = c.createGain();
+      g.gain.value = 1 / (PAD_CHORD.length * 3);
+      osc.connect(g);
+      g.connect(filter);
+      osc.start();
+      return osc;
+    });
+  });
+
+  return { out, oscillators, filter, lfo, lfoGain };
+}
+
+function fadeAmbient(to: number, duration: number) {
+  if (!ambient || !ctx) return;
+  const now = ctx.currentTime;
+  ambient.out.gain.cancelScheduledValues(now);
+  ambient.out.gain.setValueAtTime(ambient.out.gain.value, now);
+  ambient.out.gain.linearRampToValueAtTime(to, now + duration);
+}
+
+export function startAmbient() {
+  if (typeof window === 'undefined') return;
+  if (!isSoundEnabled()) return;
+  if (!ensureCtx() || !ctx || !master) return;
+  if (!ambient) {
+    ambient = buildAmbient(ctx, master);
+  }
+  if (ambientFade === 'in') return;
+  ambientFade = 'in';
+  fadeAmbient(PAD_TARGET_GAIN, 4.5);
+}
+
+export function stopAmbient() {
+  if (!ambient || !ctx) return;
+  ambientFade = 'out';
+  fadeAmbient(0, 1.8);
+}
+
+export function refreshAmbientFromSetting() {
+  if (typeof window === 'undefined') return;
+  if (isSoundEnabled()) startAmbient();
+  else stopAmbient();
+}
+
+/** Hook into Page Visibility — pause when tab hidden, resume otherwise. */
+export function bindAmbientLifecycle() {
+  if (typeof window === 'undefined') return;
+  const onVis = () => {
+    if (document.visibilityState === 'visible') {
+      if (isSoundEnabled()) startAmbient();
+    } else {
+      stopAmbient();
+    }
+  };
+  document.addEventListener('visibilitychange', onVis);
+}

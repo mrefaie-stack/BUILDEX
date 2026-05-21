@@ -5,6 +5,8 @@ import {
   isSoundEnabled,
   playSound,
   setSoundEnabled,
+  startAmbient,
+  stopAmbient,
   unlockSound
 } from '@/lib/sound';
 import { cn } from '@/lib/utils';
@@ -25,7 +27,12 @@ export function SoundToggle({ className }: { className?: string }) {
     const next = !enabled;
     setEnabled(next);
     setSoundEnabled(next);
-    if (next) playSound('click');
+    if (next) {
+      playSound('click');
+      startAmbient();
+    } else {
+      stopAmbient();
+    }
   };
 
   return (

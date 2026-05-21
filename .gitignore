@@ -17,3 +17,10 @@ next-env.d.ts
 .deploy.env.local
 .deploy-once.js
 deploy/*.local.*
+
+# SQLite database files (live data — never commit)
+var/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm

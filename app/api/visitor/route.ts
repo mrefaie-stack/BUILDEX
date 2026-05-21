@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getSupabaseService } from '@/lib/supabase';
+import { getDb, newId } from '@/lib/db';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -14,36 +14,36 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: false }, { status: 400 });
     }
 
-    const supa = getSupabaseService();
-    if (!supa) return NextResponse.json({ ok: true, stored: false });
-
     try {
-      // Try update first, insert if not found
-      const { data: existing } = await supa
-        .from('visitors')
-        .select('id')
-        .eq('visitor_id', visitor_id)
-        .maybeSingle();
+      const db = getDb();
+      const existing = db
+        .prepare('SELECT id FROM visitors WHERE visitor_id = ?')
+        .get(visitor_id) as { id: string } | undefined;
 
       if (existing) {
-        await supa
-          .from('visitors')
-          .update({
-            last_seen: new Date().toISOString(),
-            selected_path: selected_path ?? null,
-            current_level: current_level ?? null
-          })
-          .eq('visitor_id', visitor_id);
+        db.prepare(
+          `UPDATE visitors
+             SET last_seen = datetime('now'),
+                 selected_path = COALESCE(?, selected_path),
+                 current_level = COALESCE(?, current_level)
+           WHERE visitor_id = ?`
+        ).run(selected_path ?? null, current_level ?? null, visitor_id);
       } else {
-        await supa.from('visitors').insert({
+        db.prepare(
+          `INSERT INTO visitors
+             (id, visitor_id, selected_path, current_level, user_agent, source)
+           VALUES (?, ?, ?, ?, ?, ?)`
+        ).run(
+          newId(),
           visitor_id,
-          selected_path: selected_path ?? null,
-          current_level: current_level ?? null,
-          user_agent: user_agent ?? null,
-          source: source ?? null
-        });
+          selected_path ?? null,
+          current_level ?? null,
+          user_agent ?? null,
+          source ?? null
+        );
       }
-    } catch {
+    } catch (e: any) {
+      console.warn('[visitor] write failed:', e?.message);
       return NextResponse.json({ ok: true, stored: false });
     }
 

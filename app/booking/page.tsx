@@ -3,7 +3,6 @@
 import { Suspense } from 'react';
 import { LevelHeader } from '@/components/layout/LevelHeader';
 import { BookingForm } from '@/components/booking/BookingForm';
-import { CalendarEmbed } from '@/components/booking/CalendarEmbed';
 import { useTrackPage } from '@/lib/hooks';
 
 export default function BookingPage() {
@@ -13,7 +12,7 @@ export default function BookingPage() {
       <LevelHeader
         level="LEVEL 06 / الحجز"
         title="ابدأ معركتك الآن"
-        subtitle="املأ البيانات وسيتم التواصل معك لتحديد أفضل خطة لشركتك."
+        subtitle="املأ البيانات واختر موعدًا للجلسة. سيصلك تأكيد على هاتفك."
       />
 
       <section className="section">
@@ -23,7 +22,7 @@ export default function BookingPage() {
               <BookingForm />
             </Suspense>
           </div>
-          <div className="space-y-6">
+          <div className="space-y-4 lg:sticky lg:top-24 self-start">
             <div className="surface rounded-2xl p-6">
               <div className="font-mono text-[11px] tracking-widest text-accent uppercase mb-3">
                 MISSION_BRIEF
@@ -35,7 +34,17 @@ export default function BookingPage() {
                 <Item>التزام كامل بالخصوصية والسرية</Item>
               </ul>
             </div>
-            <CalendarEmbed />
+            <div className="surface rounded-2xl p-6">
+              <div className="font-mono text-[11px] tracking-widest text-accent-gold uppercase mb-3">
+                BOOKING_RULES
+              </div>
+              <ul className="space-y-2 text-xs text-ink-muted leading-relaxed">
+                <li>• المواعيد متاحة من السبت إلى الخميس</li>
+                <li>• ساعات العمل: 10 ص — 6 م (توقيت دمشق)</li>
+                <li>• الموعد بيتأكد على رقم الهاتف خلال ساعة</li>
+                <li>• يمكن تأجيل الموعد بالتواصل مباشرة</li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>

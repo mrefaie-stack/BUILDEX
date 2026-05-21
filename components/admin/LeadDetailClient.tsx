@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import type { LeadRecord, LeadStatus, VisitorEventRecord } from '@/lib/types';
+import { formatSlotLabel } from '@/lib/slots';
 import { cn } from '@/lib/utils';
 
 const STATUSES: { id: LeadStatus; label: string }[] = [
@@ -15,10 +16,18 @@ const STATUSES: { id: LeadStatus; label: string }[] = [
   { id: 'rejected', label: 'مرفوض' }
 ];
 
+interface BookingSummary {
+  id: string;
+  meeting_at: string | null;
+  meeting_duration: number | null;
+  booking_source: string | null;
+}
+
 export function LeadDetailClient({ id }: { id: string }) {
   const router = useRouter();
   const [lead, setLead] = useState<LeadRecord | null>(null);
   const [events, setEvents] = useState<VisitorEventRecord[]>([]);
+  const [bookings, setBookings] = useState<BookingSummary[]>([]);
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState<string | null>(null);
 
@@ -36,6 +45,7 @@ export function LeadDetailClient({ id }: { id: string }) {
         if (!j.ok) throw new Error(j.error ?? 'failed');
         setLead(j.lead);
         setEvents(j.events ?? []);
+        setBookings(j.bookings ?? []);
       })
       .catch((e) => setErr(e.message));
 
@@ -151,6 +161,38 @@ export function LeadDetailClient({ id }: { id: string }) {
               </span>
             ))}
           </div>
+        </div>
+      )}
+
+      {bookings.length > 0 && (
+        <div className="surface-elevated rounded-2xl p-5 mb-6 surface-glow">
+          <div className="text-xs font-mono tracking-widest text-accent-gold uppercase mb-3">
+            MEETINGS ({bookings.length})
+          </div>
+          <ul className="space-y-2">
+            {bookings.map((b) => (
+              <li
+                key={b.id}
+                className="flex items-center justify-between surface rounded-lg p-3 text-sm"
+              >
+                <div>
+                  <div className="text-ink font-medium">
+                    {b.meeting_at
+                      ? formatSlotLabel(b.meeting_at)
+                      : 'بدون توقيت محدد'}
+                  </div>
+                  <div className="text-[11px] text-ink-dim mt-0.5 font-mono">
+                    {b.booking_source ?? '—'}
+                  </div>
+                </div>
+                {b.meeting_at && (
+                  <span className="chip-gold chip !text-[11px]">
+                    {b.meeting_duration ?? 45} د
+                  </span>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
       )}
 
