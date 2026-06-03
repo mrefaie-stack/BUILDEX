@@ -105,7 +105,7 @@ export default function CalcLossPage() {
         force: true
       });
       setSubmitted(true);
-      router.push('/level-2');
+      router.push('/level-3');
     } catch {
       setSubmitting(false);
     }

@@ -11,10 +11,9 @@ import { SoundToggle } from '@/components/effects/SoundToggle';
 
 const NAV = [
   { href: '/level-1', label: 'من نحن' },
-  { href: '/level-2', label: 'الخدمات' },
-  { href: '/level-3', label: 'سجل المعارك' },
-  { href: '/level-4', label: 'الباقات' },
-  { href: '/level-5', label: 'المعركة الأخيرة' },
+  { href: '/level-2', label: 'سجل المعارك' },
+  { href: '/level-3', label: 'الخدمات والباقات' },
+  { href: '/level-4', label: 'المعركة الأخيرة' },
   { href: '/booking', label: 'الحجز' }
 ];
 
@@ -161,7 +160,7 @@ function Burger({ open }: { open: boolean }) {
 function ArsenalCounterPill({ count }: { count: number }) {
   return (
     <Link
-      href="/level-4"
+      href="/level-3"
       aria-label="ترسانتك"
       className="hidden md:inline-flex relative items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1.5 text-[12px] text-ink hover:border-accent/60 transition"
     >

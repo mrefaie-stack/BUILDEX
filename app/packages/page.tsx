@@ -1,4 +1,4 @@
 import { redirect } from 'next/navigation';
 export default function PackagesAlias() {
-  redirect('/level-4');
+  redirect('/level-3');
 }

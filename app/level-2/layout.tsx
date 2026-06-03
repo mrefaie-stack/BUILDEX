@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'خدمات MILA KNIGHT — اختر سلاحك الرقمي',
+  title: 'سجل المعارك — MILA KNIGHT',
   description:
-    'بناء مواقع، إدارة سوشيال ميديا، إعلانات ممولة، إنتاج فيديو، SEO، واستشارات للشركات التي تريد السيطرة على السوق.'
+    'كل مشروع كان معركة. تصفح المعارك التي ربحناها لشركات المقاولات والتشطيبات والعقارات.'
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

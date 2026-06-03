@@ -188,11 +188,11 @@ export default function Level1() {
               NEXT_PHASE
             </div>
             <h3 className="font-display text-2xl md:text-4xl text-gradient mb-3">
-              جاهز تختار سلاحك؟
+              جاهز تشوف إنجازاتنا؟
             </h3>
             <p className="text-ink-muted max-w-xl mx-auto mb-6">
-              كل معركة تبدأ باختيار السلاح الصحيح. اعبر إلى Level 2 لاستعراض
-              الترسانة.
+              قبل ما تختار، شوف المعارك اللي ربحناها. اعبر إلى Level 2 لقراءة
+              سجل المعارك.
             </p>
             <Magnetic strength={0.25} radius={120}>
               <Link

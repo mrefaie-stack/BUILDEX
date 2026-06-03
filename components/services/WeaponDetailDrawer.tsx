@@ -2,7 +2,6 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect } from 'react';
-import Link from 'next/link';
 import type { Weapon } from '@/lib/types';
 import { trackEvent } from '@/lib/tracking';
 import { WeaponIcon } from './WeaponIcon';
@@ -103,19 +102,21 @@ export function WeaponDetailDrawer({ weapon, onClose }: Props) {
                 </p>
               </div>
 
-              <Link
-                href="/level-4"
+              <button
                 onClick={() => {
                   playSound('select');
                   trackEvent('weapon_detail_to_arsenal', {
                     metadata: { id: weapon.id }
                   });
                   onClose();
+                  document
+                    .getElementById('arsenal-builder')
+                    ?.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }}
                 className="btn-neon w-full justify-center"
               >
-                اختر هذا السلاح في متجر الأسلحة ←
-              </Link>
+                اختر هذا السلاح في الترسانة ←
+              </button>
             </div>
           </motion.aside>
         </>

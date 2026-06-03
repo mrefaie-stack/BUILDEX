@@ -10,7 +10,7 @@ export default function BookingPage() {
   return (
     <div className="relative">
       <LevelHeader
-        level="LEVEL 06 / الحجز"
+        level="LEVEL 05 / الحجز"
         title="ابدأ معركتك الآن"
         subtitle="املأ البيانات واختر موعدًا للجلسة. سيصلك تأكيد على هاتفك."
       />

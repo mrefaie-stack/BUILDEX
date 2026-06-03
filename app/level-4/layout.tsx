@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'باقات MILA KNIGHT — اختر ترسانتك',
-  description:
-    'باقات مرنة لكل حجم شركة — أو ابنِ ترسانتك المخصصة من خدمات التسويق والمواقع والإعلانات والفيديو.'
+  title: 'المعركة الأخيرة — MILA KNIGHT',
+  description: 'قرارك الآن يحدد مستقبل شركتك. ابدأ معركتك أو توقف عن الخسارة.'
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

@@ -34,10 +34,9 @@ export function Footer() {
           <div className="text-sm font-semibold text-ink mb-3">المراحل</div>
           <ul className="space-y-2 text-sm text-ink-muted">
             <li><Link href="/level-1" className="hover:text-ink">من نحن</Link></li>
-            <li><Link href="/level-2" className="hover:text-ink">الخدمات</Link></li>
-            <li><Link href="/level-3" className="hover:text-ink">سجل المعارك</Link></li>
-            <li><Link href="/level-4" className="hover:text-ink">الباقات</Link></li>
-            <li><Link href="/level-5" className="hover:text-ink">المعركة الأخيرة</Link></li>
+            <li><Link href="/level-2" className="hover:text-ink">سجل المعارك</Link></li>
+            <li><Link href="/level-3" className="hover:text-ink">الخدمات والباقات</Link></li>
+            <li><Link href="/level-4" className="hover:text-ink">المعركة الأخيرة</Link></li>
             <li><Link href="/booking" className="hover:text-ink">الحجز</Link></li>
           </ul>
         </div>
