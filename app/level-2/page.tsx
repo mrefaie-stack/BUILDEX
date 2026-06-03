@@ -22,8 +22,8 @@ const SERVICE_FILTERS = [
   { id: 'consulting', label: 'استشارات' }
 ];
 
-export default function Level3() {
-  useTrackPage('visited_level_3', 'level-3');
+export default function Level2() {
+  useTrackPage('visited_level_2', 'level-2');
 
   const [city, setCity] = useState('الكل');
   const [service, setService] = useState('all');

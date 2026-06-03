@@ -15,9 +15,10 @@ import { trackEvent } from '@/lib/tracking';
 import { useArsenalStore } from '@/lib/store';
 import { Magnetic } from '@/components/effects/Magnetic';
 import { playSound } from '@/lib/sound';
+import { buildWaLink, CONTACT_PHONE, CONTACT_PHONE_DISPLAY } from '@/lib/utils';
 
-export default function Level5() {
-  useTrackPage('visited_level_5', 'level-5');
+export default function Level4() {
+  useTrackPage('visited_level_4', 'level-4');
   const [delayOpen, setDelayOpen] = useState(false);
   const [leadOpen, setLeadOpen] = useState(false);
   const hasSubmittedLead = useArsenalStore((s) => s.hasSubmittedLead);
@@ -124,6 +125,32 @@ export default function Level5() {
                   أو اطلب عرضًا مخصصًا قبل اتخاذ القرار
                 </button>
               )}
+
+              <div className="mt-5 pt-5 border-t border-white/8">
+                <div className="text-xs text-ink-muted mb-2">
+                  أو تواصل معنا مباشرة
+                </div>
+                <a
+                  href={`tel:+${CONTACT_PHONE}`}
+                  onClick={() => trackEvent('clicked_phone', { force: true })}
+                  dir="ltr"
+                  className="block font-display text-2xl font-extrabold text-accent tracking-wide hover:text-accent-light transition"
+                >
+                  {CONTACT_PHONE_DISPLAY}
+                </a>
+                <a
+                  href={buildWaLink(
+                    CONTACT_PHONE,
+                    'مرحبًا MILA KNIGHT، أريد التواصل بخصوص خدماتكم.'
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => trackEvent('clicked_whatsapp', { force: true })}
+                  className="btn-gold w-full justify-center mt-3"
+                >
+                  تواصل عبر واتساب
+                </a>
+              </div>
             </div>
           </div>
         </div>

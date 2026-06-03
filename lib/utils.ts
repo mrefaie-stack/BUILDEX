@@ -17,6 +17,13 @@ export function formatPhoneForWa(phone: string) {
   return phone.replace(/[^0-9]/g, '');
 }
 
+// ---- MILA KNIGHT public contact number ----
+/** Digits-only number for wa.me / tel: links. */
+export const CONTACT_PHONE =
+  process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '966560004773';
+/** Human-readable form for display (LTR). */
+export const CONTACT_PHONE_DISPLAY = '+966 56 000 4773';
+
 export function buildWaLink(number: string, message: string) {
   return `https://wa.me/${formatPhoneForWa(number)}?text=${encodeURIComponent(
     message

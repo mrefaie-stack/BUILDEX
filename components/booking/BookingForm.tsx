@@ -152,9 +152,9 @@ export function BookingForm() {
     }
   };
 
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '963000000000';
+  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '966560004773';
   const waMessage =
-    `مرحبًا BUILDEX، أريد بدء معركتي الرقمية. هذه بياناتي: ${
+    `مرحبًا MILA KNIGHT، أريد بدء معركتي الرقمية. هذه بياناتي: ${
       form.name || '...'
     } - ${form.city || '...'} - ${form.selected_package || '...'}`;
   const waLink = buildWaLink(waNumber, waMessage);

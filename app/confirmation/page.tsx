@@ -49,10 +49,10 @@ function ConfirmationInner() {
     weapons.includes(w.id)
   );
 
-  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '963000000000';
+  const waNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '966560004773';
   const waLink = buildWaLink(
     waNumber,
-    `تم حجز معركتي مع BUILDEX. اسمي: ${lead.name || '...'} - الباقة: ${
+    `تم حجز معركتي مع MILA KNIGHT. اسمي: ${lead.name || '...'} - الباقة: ${
       pkg?.name || 'مخصصة'
     }${meetingLabel ? ` - الموعد: ${meetingLabel}` : ''}`
   );
@@ -91,7 +91,7 @@ function ConfirmationInner() {
               تم استلام طلبك
             </h1>
             <p className="mt-4 text-ink-muted max-w-2xl mx-auto leading-relaxed">
-              فريق BUILDEX سيبدأ مراجعة بياناتك، وسيتم التواصل معك قريبًا
+              فريق MILA KNIGHT سيبدأ مراجعة بياناتك، وسيتم التواصل معك قريبًا
               لتأكيد الجلسة وتفعيل خطتك.
             </p>
           </motion.div>
