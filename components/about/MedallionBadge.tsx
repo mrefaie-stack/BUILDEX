@@ -45,7 +45,7 @@ export function MedallionBadge({ icon, number, title, body, index }: Props) {
       {/* Glow plate */}
       <div
         className="absolute -inset-6 rounded-full blur-2xl opacity-50"
-        style={{ background: 'radial-gradient(circle, rgba(230,180,80,0.45), transparent 60%)' }}
+        style={{ background: 'radial-gradient(circle, rgba(255,138,61,0.45), transparent 60%)' }}
       />
 
       {/* Medallion */}
@@ -53,8 +53,8 @@ export function MedallionBadge({ icon, number, title, body, index }: Props) {
         <svg viewBox="0 0 128 128" className="absolute inset-0 h-full w-full">
           <defs>
             <linearGradient id={`mg-${index}`} x1="0" y1="0" x2="128" y2="128">
-              <stop offset="0" stopColor="#FFE9B0" />
-              <stop offset="0.5" stopColor="#E6B450" />
+              <stop offset="0" stopColor="#FFB070" />
+              <stop offset="0.5" stopColor="#FF8A3D" />
               <stop offset="1" stopColor="#6E4612" />
             </linearGradient>
             <radialGradient id={`mgr-${index}`} cx="50%" cy="40%" r="60%">

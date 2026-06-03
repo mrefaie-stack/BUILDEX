@@ -13,7 +13,7 @@ const jet = JetBrains_Mono({
 });
 
 export const metadata = {
-  title: 'لوحة الإدارة | MilaKnight',
+  title: 'لوحة الإدارة | MILA KNIGHT',
   robots: { index: false, follow: false }
 };
 

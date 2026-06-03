@@ -25,7 +25,7 @@ const STATUS_AR: Record<LeadStatus, string> = {
 
 const STATUS_COLOR: Record<LeadStatus, string> = {
   new: 'bg-accent/15 text-accent border-accent/30',
-  contacted: 'bg-sky-400/10 text-sky-300 border-sky-400/30',
+  contacted: 'bg-accent-light/10 text-accent-light border-accent-light/30',
   interested: 'bg-accent-gold/15 text-accent-gold border-accent-gold/30',
   follow_up: 'bg-accent-orange/15 text-accent-orange border-accent-orange/30',
   converted: 'bg-accent-green/15 text-accent-green border-accent-green/30',

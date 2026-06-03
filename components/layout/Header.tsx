@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -43,12 +44,15 @@ export function Header() {
       )}
     >
       <div className="container-tight flex h-16 items-center justify-between gap-4">
-        <Link href="/" className="flex items-center gap-2 group">
+        <Link href="/" className="flex items-center gap-2.5 group" aria-label="MILA KNIGHT">
           <Logo />
-          <div className="leading-tight">
-            <div className="font-display text-lg text-gradient">MilaKnight</div>
-            <div className="text-[10px] text-ink-muted tracking-[0.2em] uppercase">
-              Digital Warfare
+          <div className="leading-none">
+            <div className="font-display text-lg font-extrabold tracking-tight">
+              <span className="text-accent">MILA</span>{' '}
+              <span className="text-ink">KNIGHT</span>
+            </div>
+            <div className="text-[9px] text-ink-muted tracking-[0.28em] uppercase mt-1">
+              Marketing Agency
             </div>
           </div>
         </Link>
@@ -157,7 +161,7 @@ function Burger({ open }: { open: boolean }) {
 function ArsenalCounterPill({ count }: { count: number }) {
   return (
     <Link
-      href="/level-2"
+      href="/level-4"
       aria-label="ترسانتك"
       className="hidden md:inline-flex relative items-center gap-2 rounded-full border border-accent/30 bg-accent/5 px-3 py-1.5 text-[12px] text-ink hover:border-accent/60 transition"
     >
@@ -181,30 +185,16 @@ function ArsenalCounterPill({ count }: { count: number }) {
 
 function Logo() {
   return (
-    <div className="relative h-9 w-9">
-      <div className="absolute inset-0 rounded-[10px] bg-gradient-to-br from-accent/40 via-accent/10 to-accent-gold/30 blur-[8px] opacity-80" />
-      <div className="relative grid h-9 w-9 place-items-center rounded-[10px] border border-white/10 bg-bg-card">
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M3 21 L3 6 L12 3 L21 6 L21 21 L14 21 L14 14 L10 14 L10 21 Z"
-            stroke="url(#g1)"
-            strokeWidth="1.6"
-            strokeLinejoin="round"
-          />
-          <defs>
-            <linearGradient id="g1" x1="0" y1="0" x2="24" y2="24">
-              <stop offset="0" stopColor="#00D1FF" />
-              <stop offset="1" stopColor="#E6B450" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
+    <div className="relative h-10 w-10 transition-transform duration-300 group-hover:scale-105">
+      <div className="absolute inset-0 rounded-[10px] bg-accent/25 blur-[10px] opacity-70 group-hover:opacity-100 transition" />
+      <Image
+        src="/logo-mark.png"
+        alt="MILA KNIGHT"
+        width={40}
+        height={40}
+        priority
+        className="relative h-10 w-10 object-contain drop-shadow-[0_2px_8px_rgba(255,50,0,0.35)]"
+      />
     </div>
   );
 }

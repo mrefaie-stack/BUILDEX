@@ -24,6 +24,8 @@ export interface Weapon {
   features: string[];
   duration: string;
   priceRange: string;
+  /** Approximate monthly price (USD) — used by the arsenal builder in Level 4. */
+  monthly: number;
   expectedResult: string;
   icon: string;
   accent?: 'blue' | 'gold' | 'red' | 'cyan' | 'green' | 'orange';

@@ -26,7 +26,7 @@ export function ConsentCheckbox({ checked, onChange, error }: Props) {
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none">
               <path
                 d="M5 12 L10 17 L19 7"
-                stroke="#02030A"
+                stroke="#FFFFFF"
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -41,7 +41,7 @@ export function ConsentCheckbox({ checked, onChange, error }: Props) {
           />
         </span>
         <span className="text-xs text-ink-muted leading-relaxed">
-          أوافق على استخدام بياناتي للتواصل معي بخصوص خدمات MilaKnight وإرسال
+          أوافق على استخدام بياناتي للتواصل معي بخصوص خدمات MILA KNIGHT وإرسال
           خطة مناسبة لشركتي.
         </span>
       </label>

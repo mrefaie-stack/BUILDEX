@@ -60,8 +60,8 @@ export default function GatePage() {
           <svg viewBox="0 0 24 24" className="relative h-7 w-7" fill="none">
             <defs>
               <linearGradient id="swG" x1="0" y1="0" x2="24" y2="24">
-                <stop offset="0" stopColor="#FFE9B0" />
-                <stop offset="1" stopColor="#8C5A12" />
+                <stop offset="0" stopColor="#FFB070" />
+                <stop offset="1" stopColor="#C82D08" />
               </linearGradient>
             </defs>
             <path
@@ -112,7 +112,7 @@ export default function GatePage() {
           className="font-display text-4xl md:text-7xl font-extrabold tracking-tight leading-[1.15]"
           style={{
             textShadow:
-              '0 0 24px rgba(0,209,255,0.12), 0 1px 0 rgba(0,0,0,0.6)'
+              '0 0 24px rgba(255,50,0,0.12), 0 1px 0 rgba(0,0,0,0.6)'
           }}
         >
           <span className="text-gradient">شركتك جاهزة تنبني رقميًا؟</span>
@@ -173,7 +173,7 @@ export default function GatePage() {
 
       {/* Bottom-left status text */}
       <div className="absolute bottom-6 left-6 md:left-10 z-20 text-[10px] font-mono tracking-[0.3em] text-ink-dim hidden md:block">
-        MilaKnight · DIGITAL_WARFARE_SYSTEM
+        MILA KNIGHT · MARKETING_AGENCY
       </div>
       <div className="absolute bottom-6 right-6 md:right-10 z-20 flex items-center gap-2 text-[10px] font-mono tracking-[0.3em] text-ink-dim hidden md:flex">
         <span>EXPLORE_THE_GATE</span>

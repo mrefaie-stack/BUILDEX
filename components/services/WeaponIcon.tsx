@@ -6,7 +6,9 @@ const PATHS: Record<string, string> = {
   ads: 'M3 11l9-5 9 5-9 5zM7 13v5l5 3 5-3v-5',
   video: 'M3 5h12v14H3zM17 9l4-2v10l-4-2z',
   seo: 'M11 4a7 7 0 0 1 5 12l5 5-2 2-5-5a7 7 0 1 1-3-14z',
-  consulting: 'M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z'
+  consulting: 'M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z',
+  brand: 'M12 3l7 4v5c0 4-3 7-7 9-4-2-7-5-7-9V7zM9 12l2 2 4-4',
+  crm: 'M9 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM3 20a6 6 0 0 1 12 0M17 8h4M19 6v4'
 };
 
 export function WeaponIcon({ name, className }: { name: string; className?: string }) {

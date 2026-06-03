@@ -110,7 +110,7 @@ export function HeroAtmosphere() {
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse 80% 90% at 50% 30%, rgba(0,209,255,0.10), transparent 60%), radial-gradient(ellipse 100% 100% at 50% 110%, rgba(255,138,61,0.06), transparent 60%), linear-gradient(180deg, #02030A 0%, #05070D 50%, #02030A 100%)'
+            'radial-gradient(ellipse 80% 90% at 50% 30%, rgba(255,50,0,0.10), transparent 60%), radial-gradient(ellipse 100% 100% at 50% 110%, rgba(255,138,61,0.06), transparent 60%), linear-gradient(180deg, #121212 0%, #1A1A1A 50%, #121212 100%)'
         }}
       />
 
@@ -122,7 +122,7 @@ export function HeroAtmosphere() {
         className="absolute left-1/2 top-0 h-[70vh] w-[40vw] -translate-x-1/2 blur-3xl"
         style={{
           background:
-            'linear-gradient(180deg, rgba(0,209,255,0.20) 0%, rgba(0,209,255,0.05) 60%, transparent 100%)'
+            'linear-gradient(180deg, rgba(255,50,0,0.20) 0%, rgba(255,50,0,0.05) 60%, transparent 100%)'
         }}
       />
 
@@ -146,8 +146,8 @@ export function HeroAtmosphere() {
         className="absolute left-1/2 top-[12%] h-[60%] w-[2px] -translate-x-1/2 origin-top blur-[1px]"
         style={{
           background:
-            'linear-gradient(180deg, transparent 0%, rgba(0,209,255,0.0) 5%, rgba(0,209,255,0.95) 50%, rgba(0,209,255,0.0) 95%)',
-          boxShadow: '0 0 24px rgba(0,209,255,0.65)'
+            'linear-gradient(180deg, transparent 0%, rgba(255,50,0,0.0) 5%, rgba(255,50,0,0.95) 50%, rgba(255,50,0,0.0) 95%)',
+          boxShadow: '0 0 24px rgba(255,50,0,0.65)'
         }}
       />
 

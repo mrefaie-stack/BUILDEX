@@ -36,7 +36,7 @@ function ConfirmationInner() {
       count: 180,
       spread: 180,
       power: 12,
-      colors: ['#00D1FF', '#E6B450', '#FFFFFF', '#FF8A3D', '#10B981']
+      colors: ['#FF3200', '#FF8A3D', '#FFFFFF', '#FF8A3D', '#2ED16A']
     });
     const t = setTimeout(() => {
       burstAtCenter({ count: 80, spread: 150, power: 9 });
@@ -73,7 +73,7 @@ function ConfirmationInner() {
                 animate={{ pathLength: 1 }}
                 transition={{ duration: 0.7, delay: 0.3 }}
                 d="M5 12 L10 17 L19 7"
-                stroke="#00D1FF"
+                stroke="#FF3200"
                 strokeWidth="2.5"
                 strokeLinecap="round"
                 strokeLinejoin="round"

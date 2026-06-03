@@ -38,7 +38,7 @@ export function Particles({ density = 80 }: { density?: number }) {
 
       // soft glow
       const grad = ctx.createRadialGradient(w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) / 1.4);
-      grad.addColorStop(0, 'rgba(0,209,255,0.06)');
+      grad.addColorStop(0, 'rgba(255,50,0,0.06)');
       grad.addColorStop(1, 'rgba(0,0,0,0)');
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, w, h);
@@ -63,7 +63,7 @@ export function Particles({ density = 80 }: { density?: number }) {
           const d2 = dx * dx + dy * dy;
           if (d2 < 140 * 140) {
             const a = 1 - d2 / (140 * 140);
-            ctx.strokeStyle = `rgba(0,209,255,${a * 0.18})`;
+            ctx.strokeStyle = `rgba(255,50,0,${a * 0.18})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);

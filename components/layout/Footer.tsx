@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 
 export function Footer() {
@@ -11,7 +12,19 @@ export function Footer() {
     <footer className="relative z-10 border-t border-white/5 mt-24">
       <div className="container-tight py-12 grid gap-10 md:grid-cols-3">
         <div>
-          <div className="font-display text-2xl text-gradient mb-3">MilaKnight</div>
+          <div className="flex items-center gap-2.5 mb-3">
+            <Image
+              src="/logo-mark.png"
+              alt="MILA KNIGHT"
+              width={36}
+              height={36}
+              className="h-9 w-9 object-contain"
+            />
+            <div className="font-display text-2xl font-extrabold tracking-tight leading-none">
+              <span className="text-accent">MILA</span>{' '}
+              <span className="text-ink">KNIGHT</span>
+            </div>
+          </div>
           <p className="text-sm text-ink-muted leading-relaxed">
             نحن لا نبيع خدمات. نخوض معكم معركة السيطرة الرقمية ونحول شركتكم إلى
             قوة لا يمكن تجاوزها.
@@ -39,8 +52,8 @@ export function Footer() {
       </div>
       <div className="divider-x" />
       <div className="container-tight py-6 flex flex-col md:flex-row md:items-center md:justify-between gap-2 text-xs text-ink-dim">
-        <div>© {new Date().getFullYear()} MilaKnight. كل المعارك محفوظة.</div>
-        <div className="font-mono tracking-widest">DIGITAL_WARFARE/v1.0</div>
+        <div>© {new Date().getFullYear()} MILA KNIGHT. كل المعارك محفوظة.</div>
+        <div className="font-mono tracking-widest text-accent/70">MILA_KNIGHT/v1.0</div>
       </div>
     </footer>
   );

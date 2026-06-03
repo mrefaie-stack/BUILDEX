@@ -8,6 +8,7 @@ out
 *.log
 .vercel
 next-env.d.ts
+tsconfig.tsbuildinfo
 
 # Local IDE / agent settings
 .claude/settings.local.json

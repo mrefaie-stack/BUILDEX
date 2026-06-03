@@ -138,7 +138,7 @@ export function BookingForm() {
         count: 140,
         spread: 160,
         power: 11,
-        colors: ['#00D1FF', '#E6B450', '#FFFFFF', '#FF8A3D']
+        colors: ['#FF3200', '#FF8A3D', '#FFFFFF', '#FF8A3D']
       });
       const params = new URLSearchParams();
       if (j.meeting_label) params.set('m', j.meeting_label);

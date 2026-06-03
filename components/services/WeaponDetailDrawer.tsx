@@ -2,26 +2,18 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect } from 'react';
+import Link from 'next/link';
 import type { Weapon } from '@/lib/types';
-import { useArsenalStore } from '@/lib/store';
 import { trackEvent } from '@/lib/tracking';
 import { WeaponIcon } from './WeaponIcon';
-import { burstAtElement } from '@/components/effects/Confetti';
 import { playSound } from '@/lib/sound';
 
 interface Props {
   weapon: Weapon | null;
   onClose: () => void;
-  onAdded?: () => void;
 }
 
-export function WeaponDetailDrawer({ weapon, onClose, onAdded }: Props) {
-  const selected = useArsenalStore((s) =>
-    weapon ? s.selectedWeapons.includes(weapon.id) : false
-  );
-  const addWeapon = useArsenalStore((s) => s.addWeapon);
-  const removeWeapon = useArsenalStore((s) => s.removeWeapon);
-
+export function WeaponDetailDrawer({ weapon, onClose }: Props) {
   useEffect(() => {
     if (!weapon) return;
     trackEvent('opened_weapon_detail', { metadata: { id: weapon.id } });
@@ -111,40 +103,19 @@ export function WeaponDetailDrawer({ weapon, onClose, onAdded }: Props) {
                 </p>
               </div>
 
-              {selected ? (
-                <button
-                  onClick={() => {
-                    removeWeapon(weapon.id);
-                    playSound('deny');
-                    trackEvent('removed_weapon_from_arsenal', {
-                      metadata: { id: weapon.id }
-                    });
-                  }}
-                  className="btn-ghost w-full"
-                >
-                  إزالة من الترسانة
-                </button>
-              ) : (
-                <button
-                  onClick={(e) => {
-                    addWeapon(weapon.id);
-                    playSound('select');
-                    burstAtElement(e.currentTarget, {
-                      count: 50,
-                      spread: 100,
-                      power: 7,
-                      colors: ['#00D1FF', '#E6B450', '#FFFFFF']
-                    });
-                    trackEvent('added_weapon_to_arsenal', {
-                      metadata: { id: weapon.id }
-                    });
-                    onAdded?.();
-                  }}
-                  className="btn-neon w-full justify-center"
-                >
-                  أضف إلى ترسانتي
-                </button>
-              )}
+              <Link
+                href="/level-4"
+                onClick={() => {
+                  playSound('select');
+                  trackEvent('weapon_detail_to_arsenal', {
+                    metadata: { id: weapon.id }
+                  });
+                  onClose();
+                }}
+                className="btn-neon w-full justify-center"
+              >
+                اختر هذا السلاح في متجر الأسلحة ←
+              </Link>
             </div>
           </motion.aside>
         </>

@@ -9,49 +9,54 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        // ---- MilaKnight brand: charcoal canvas, vivid orange-red, white ----
         bg: {
-          DEFAULT: '#05070D',
-          deep: '#02030A',
-          card: '#0A0E1A',
-          elevated: '#0F1424'
+          DEFAULT: '#1A1A1A',
+          deep: '#121212',
+          card: '#222222',
+          elevated: '#2A2A2A'
         },
         ink: {
-          DEFAULT: '#F5F7FB',
-          muted: '#A6ADBB',
-          dim: '#6B7280'
+          DEFAULT: '#FFFFFF',
+          muted: '#B3B3B3',
+          dim: '#7A7A7A'
         },
         accent: {
-          DEFAULT: '#00D1FF',
-          gold: '#E6B450',
-          cyan: '#22D3EE',
-          red: '#FF3B57',
+          // Primary brand orange-red (sampled from the logo: #FF3200)
+          DEFAULT: '#FF3200',
+          light: '#FF5A2E',
+          deep: '#C82D08',
+          // legacy aliases kept so existing class names map onto the brand
+          gold: '#FF8A3D',
+          cyan: '#FF5A2E',
+          red: '#FF3B30',
           orange: '#FF8A3D',
-          green: '#10B981'
+          green: '#2ED16A'
         },
         border: {
-          DEFAULT: 'rgba(255,255,255,0.06)',
-          glow: 'rgba(0,209,255,0.35)'
+          DEFAULT: 'rgba(255,255,255,0.08)',
+          glow: 'rgba(255,50,0,0.40)'
         }
       },
       fontFamily: {
         sans: ['var(--font-cairo)', 'system-ui', 'sans-serif'],
-        display: ['var(--font-rakkas)', 'serif'],
-        gothic: ['var(--font-cinzel)', 'serif'],
+        display: ['var(--font-display)', 'var(--font-cairo)', 'sans-serif'],
+        gothic: ['var(--font-display)', 'sans-serif'],
         mono: ['var(--font-jetbrains)', 'monospace']
       },
       boxShadow: {
-        glow: '0 0 40px -8px rgba(0,209,255,0.45)',
-        'glow-gold': '0 0 40px -8px rgba(230,180,80,0.45)',
-        'glow-red': '0 0 40px -8px rgba(255,59,87,0.45)',
+        glow: '0 0 40px -8px rgba(255,50,0,0.50)',
+        'glow-gold': '0 0 40px -8px rgba(255,138,61,0.45)',
+        'glow-red': '0 0 40px -8px rgba(255,59,48,0.45)',
         elevated: '0 24px 60px -20px rgba(0,0,0,0.7)'
       },
       backgroundImage: {
         'grid-faint':
           'linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px)',
         'radial-glow':
-          'radial-gradient(ellipse at center, rgba(0,209,255,0.18), transparent 60%)',
+          'radial-gradient(ellipse at center, rgba(255,50,0,0.18), transparent 60%)',
         'radial-red':
-          'radial-gradient(ellipse at center, rgba(255,59,87,0.18), transparent 60%)'
+          'radial-gradient(ellipse at center, rgba(255,59,48,0.18), transparent 60%)'
       },
       backgroundSize: {
         grid: '32px 32px'

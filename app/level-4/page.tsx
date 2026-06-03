@@ -1,23 +1,40 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import packagesJson from '@/data/packages.json';
 import { LevelHeader } from '@/components/layout/LevelHeader';
 import { PackageCard } from '@/components/packages/PackageCard';
 import { PackageBuilder } from '@/components/packages/PackageBuilder';
+import { ArsenalLeadModal } from '@/components/services/ArsenalLeadModal';
 import type { Package } from '@/lib/types';
 import { useTrackPage } from '@/lib/hooks';
+import { useArsenalStore } from '@/lib/store';
 
 export default function Level4() {
   useTrackPage('visited_level_4', 'level-4');
   const packages = packagesJson.packages as Package[];
+
+  const selected = useArsenalStore((s) => s.selectedWeapons);
+  const arsenalCaptureSeen = useArsenalStore((s) => s.arsenalCaptureSeen);
+  const markSeen = useArsenalStore((s) => s.markArsenalCaptureSeen);
+  const hasSubmittedLead = useArsenalStore((s) => s.hasSubmittedLead);
+  const [leadOpen, setLeadOpen] = useState(false);
+
+  // Once the visitor builds an arsenal of 2+ weapons, offer a tailored quote (once).
+  useEffect(() => {
+    if (selected.length >= 2 && !arsenalCaptureSeen && !hasSubmittedLead) {
+      const t = setTimeout(() => setLeadOpen(true), 600);
+      return () => clearTimeout(t);
+    }
+  }, [selected.length, arsenalCaptureSeen, hasSubmittedLead]);
 
   return (
     <div className="relative">
       <LevelHeader
         level="LEVEL 04 / متجر الأسلحة"
         title="اختر ترسانتك"
-        subtitle="كل معركة لها أسلحتها — وكل شركة لها حجم حرب مختلف. اختر ترسانتك بحكمة، أو ابنِ ترسانة مخصصة."
+        subtitle="هنا تختار. باقة جاهزة تناسب حجم معركتك، أو ابنِ ترسانتك الخاصة سلاحًا بسلاح وشاهد التكلفة الشهرية لحظيًا."
         accent="gold"
       />
 
@@ -29,6 +46,16 @@ export default function Level4() {
         </div>
 
         <div className="container-tight mt-12">
+          <div className="relative my-2 flex items-center gap-4">
+            <div className="divider-x" />
+            <span className="shrink-0 text-xs font-mono tracking-[0.3em] text-ink-dim uppercase">
+              أو
+            </span>
+            <div className="divider-x" />
+          </div>
+        </div>
+
+        <div className="container-tight mt-6">
           <PackageBuilder />
         </div>
 
@@ -46,6 +73,14 @@ export default function Level4() {
           </div>
         </div>
       </section>
+
+      <ArsenalLeadModal
+        open={leadOpen}
+        onClose={() => {
+          setLeadOpen(false);
+          markSeen();
+        }}
+      />
     </div>
   );
 }

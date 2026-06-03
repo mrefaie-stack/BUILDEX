@@ -52,7 +52,7 @@ export function CursorSpotlight() {
         className="absolute h-[600px] w-[600px] rounded-full opacity-60"
         style={{
           background:
-            'radial-gradient(circle at center, rgba(0,209,255,0.18) 0%, rgba(0,209,255,0.05) 35%, rgba(0,0,0,0) 70%)',
+            'radial-gradient(circle at center, rgba(255,50,0,0.18) 0%, rgba(255,50,0,0.05) 35%, rgba(0,0,0,0) 70%)',
           willChange: 'transform'
         }}
       />

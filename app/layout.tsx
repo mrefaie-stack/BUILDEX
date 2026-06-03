@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Cairo, Rakkas, JetBrains_Mono, Cinzel } from 'next/font/google';
+import { Cairo, Tajawal, JetBrains_Mono } from 'next/font/google';
 import './globals.css';
 import { AnalyticsProvider } from '@/components/tracking/AnalyticsProvider';
 import { Header } from '@/components/layout/Header';
@@ -16,17 +16,11 @@ const cairo = Cairo({
   display: 'swap'
 });
 
-const rakkas = Rakkas({
+// Bold geometric display face that echoes the heavy lettering in the logo.
+const tajawal = Tajawal({
   subsets: ['arabic', 'latin'],
-  weight: ['400'],
-  variable: '--font-rakkas',
-  display: 'swap'
-});
-
-const cinzel = Cinzel({
-  subsets: ['latin'],
-  weight: ['400', '500', '600', '700', '800', '900'],
-  variable: '--font-cinzel',
+  weight: ['400', '500', '700', '800', '900'],
+  variable: '--font-display',
   display: 'swap'
 });
 
@@ -38,28 +32,41 @@ const jetbrains = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://milaknight.example'),
+  metadataBase: new URL('https://buildex.mila-knight.com'),
   title: {
-    default: 'MilaKnight — ابنِ حضور شركتك الرقمي',
-    template: '%s | MilaKnight'
+    default: 'MILA KNIGHT — ابنِ حضور شركتك الرقمي',
+    template: '%s | MILA KNIGHT'
   },
   description:
-    'تجربة تفاعلية لشركات المقاولات والتشطيبات والعقارات لاختيار خدمات التسويق، المواقع، الإعلانات، والسوشيال ميديا.',
+    'وكالة MILA KNIGHT للتسويق — تجربة تفاعلية لشركات المقاولات والتشطيبات والعقارات لاختيار خدمات التسويق، المواقع، الإعلانات، والسوشيال ميديا.',
   openGraph: {
-    title: 'MilaKnight — ابنِ حضور شركتك الرقمي',
+    title: 'MILA KNIGHT — ابنِ حضور شركتك الرقمي',
     description:
-      'تجربة تفاعلية لشركات المقاولات والتشطيبات والعقارات لاختيار خدمات التسويق، المواقع، الإعلانات، والسوشيال ميديا.',
+      'وكالة MILA KNIGHT للتسويق — تجربة تفاعلية لشركات المقاولات والتشطيبات والعقارات لاختيار خدمات التسويق، المواقع، الإعلانات، والسوشيال ميديا.',
     type: 'website',
-    locale: 'ar_SY'
+    locale: 'ar_SY',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'MILA KNIGHT' }]
   },
-  themeColor: '#05070D',
-  icons: { icon: '/favicon.svg' }
+  twitter: {
+    card: 'summary_large_image',
+    title: 'MILA KNIGHT — ابنِ حضور شركتك الرقمي',
+    images: ['/og.png']
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/icon-32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' }
+    ],
+    apple: '/apple-icon.png'
+  }
 };
 
 export const viewport: Viewport = {
   width: 'device-width',
   initialScale: 1,
-  themeColor: '#05070D'
+  themeColor: '#1A1A1A'
 };
 
 export default function RootLayout({
@@ -71,7 +78,7 @@ export default function RootLayout({
     <html
       lang="ar"
       dir="rtl"
-      className={`${cairo.variable} ${rakkas.variable} ${cinzel.variable} ${jetbrains.variable}`}
+      className={`${cairo.variable} ${tajawal.variable} ${jetbrains.variable}`}
     >
       <body className="font-sans antialiased">
         <AnalyticsProvider>

@@ -70,8 +70,8 @@ function renderHtml(p: NotifyPayload): string {
     .map(
       ([k, v]) => `
         <tr>
-          <td style="padding:8px 12px;background:#0F1424;border:1px solid #1f2937;color:#9CA3AF;font-size:13px;width:170px;">${escape(k)}</td>
-          <td style="padding:8px 12px;background:#080A12;border:1px solid #1f2937;color:#F5F7FB;font-size:14px;">${escape(String(v))}</td>
+          <td style="padding:8px 12px;background:#2A2A2A;border:1px solid #333333;color:#B3B3B3;font-size:13px;width:170px;">${escape(k)}</td>
+          <td style="padding:8px 12px;background:#1A1A1A;border:1px solid #333333;color:#FFFFFF;font-size:14px;">${escape(String(v))}</td>
         </tr>`
     )
     .join('');
@@ -79,7 +79,7 @@ function renderHtml(p: NotifyPayload): string {
   const ctaHtml = p.cta
     ? `
       <a href="${escape(p.cta.url)}"
-         style="display:inline-block;padding:12px 22px;border-radius:10px;background:linear-gradient(135deg,#00D1FF,#007BFF);color:#02030A;text-decoration:none;font-weight:700;letter-spacing:.02em;margin-top:20px;">
+         style="display:inline-block;padding:12px 22px;border-radius:10px;background:linear-gradient(135deg,#FF5A2E,#C82D08);color:#FFFFFF;text-decoration:none;font-weight:700;letter-spacing:.02em;margin-top:20px;">
         ${escape(p.cta.label)}
       </a>`
     : '';
@@ -87,21 +87,21 @@ function renderHtml(p: NotifyPayload): string {
   return `
 <!DOCTYPE html>
 <html dir="rtl" lang="ar">
-<body style="margin:0;padding:24px;background:#05070D;font-family:'Segoe UI',Cairo,Arial,sans-serif;color:#F5F7FB;">
-  <div style="max-width:640px;margin:0 auto;background:#0A0E1A;border:1px solid #1f2937;border-radius:16px;overflow:hidden;">
-    <div style="padding:18px 22px;background:linear-gradient(135deg,rgba(0,209,255,0.18),rgba(230,180,80,0.12));border-bottom:1px solid #1f2937;">
-      <div style="font-size:11px;letter-spacing:.4em;color:#00D1FF;font-family:Consolas,monospace;">BUILDEX · NEW_INTERACTION</div>
+<body style="margin:0;padding:24px;background:#121212;font-family:'Segoe UI',Cairo,Arial,sans-serif;color:#FFFFFF;">
+  <div style="max-width:640px;margin:0 auto;background:#1F1F1F;border:1px solid #333333;border-radius:16px;overflow:hidden;">
+    <div style="padding:18px 22px;background:linear-gradient(135deg,rgba(255,50,0,0.20),rgba(255,138,61,0.12));border-bottom:1px solid #333333;">
+      <div style="font-size:11px;letter-spacing:.4em;color:#FF3200;font-family:Consolas,monospace;">MILA KNIGHT · NEW_INTERACTION</div>
       <div style="font-size:20px;font-weight:700;margin-top:4px;">${escape(p.subject)}</div>
     </div>
     <div style="padding:22px;">
-      ${p.intro ? `<p style="margin:0 0 16px;color:#A6ADBB;line-height:1.7;">${escape(p.intro)}</p>` : ''}
+      ${p.intro ? `<p style="margin:0 0 16px;color:#B3B3B3;line-height:1.7;">${escape(p.intro)}</p>` : ''}
       <table cellspacing="0" cellpadding="0" style="width:100%;border-collapse:collapse;border-radius:8px;overflow:hidden;">
         ${rows}
       </table>
       ${ctaHtml}
     </div>
-    <div style="padding:14px 22px;border-top:1px solid #1f2937;color:#6B7280;font-size:11px;font-family:Consolas,monospace;letter-spacing:.2em;">
-      BUILDEX · MILA-KNIGHT.COM · ${new Date().toISOString().slice(0, 19).replace('T', ' ')}
+    <div style="padding:14px 22px;border-top:1px solid #333333;color:#7A7A7A;font-size:11px;font-family:Consolas,monospace;letter-spacing:.2em;">
+      MILA KNIGHT · MILA-KNIGHT.COM · ${new Date().toISOString().slice(0, 19).replace('T', ' ')}
     </div>
   </div>
 </body>
@@ -110,7 +110,7 @@ function renderHtml(p: NotifyPayload): string {
 
 function renderText(p: NotifyPayload): string {
   const lines = [
-    `BUILDEX — ${p.subject}`,
+    `MILA KNIGHT — ${p.subject}`,
     p.intro ? '' : null,
     p.intro ?? null,
     '',
@@ -136,7 +136,7 @@ export async function notify(p: NotifyPayload): Promise<boolean> {
     await tx.sendMail({
       from: cfg.from,
       to: cfg.to,
-      subject: `[BUILDEX] ${p.subject}`,
+      subject: `[MILA KNIGHT] ${p.subject}`,
       html: renderHtml(p),
       text: renderText(p)
     });

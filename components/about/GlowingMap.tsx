@@ -14,12 +14,12 @@ export function GlowingMap() {
       >
         <defs>
           <radialGradient id="bgFill" cx="50%" cy="50%" r="60%">
-            <stop offset="0%" stopColor="rgba(0,209,255,0.06)" />
+            <stop offset="0%" stopColor="rgba(255,50,0,0.06)" />
             <stop offset="100%" stopColor="rgba(0,0,0,0)" />
           </radialGradient>
           <linearGradient id="lineG" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#00D1FF" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#E6B450" stopOpacity="0.6" />
+            <stop offset="0%" stopColor="#FF3200" stopOpacity="0.6" />
+            <stop offset="100%" stopColor="#FF8A3D" stopOpacity="0.6" />
           </linearGradient>
         </defs>
         <rect width="100" height="100" fill="url(#bgFill)" />
@@ -27,7 +27,7 @@ export function GlowingMap() {
         <path
           d="M14,28 L24,22 L36,18 L48,15 L60,18 L72,22 L84,28 L86,40 L82,52 L78,62 L72,72 L60,80 L48,84 L36,82 L24,76 L18,68 L12,56 L14,42 Z"
           fill="rgba(255,255,255,0.02)"
-          stroke="rgba(0,209,255,0.25)"
+          stroke="rgba(255,50,0,0.25)"
           strokeWidth="0.4"
         />
 
@@ -58,7 +58,7 @@ export function GlowingMap() {
               cx={c.x}
               cy={c.y}
               r={3}
-              fill="rgba(0,209,255,0.18)"
+              fill="rgba(255,50,0,0.18)"
               initial={{ scale: 0 }}
               whileInView={{ scale: [0, 1.6, 1] }}
               viewport={{ once: true }}
@@ -68,7 +68,7 @@ export function GlowingMap() {
               cx={c.x}
               cy={c.y}
               r={0.9}
-              fill="#00D1FF"
+              fill="#FF3200"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}

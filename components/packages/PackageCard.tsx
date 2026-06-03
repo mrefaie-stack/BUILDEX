@@ -29,8 +29,8 @@ export function PackageCard({ pkg, index }: Props) {
       spread: 110,
       power: 9,
       colors: pkg.popular
-        ? ['#00D1FF', '#E6B450', '#FFFFFF']
-        : ['#00D1FF', '#FFFFFF']
+        ? ['#FF3200', '#FF8A3D', '#FFFFFF']
+        : ['#FF3200', '#FFFFFF']
     });
     trackEvent('selected_package', { metadata: { package: pkg.id } });
     setTimeout(() => router.push(`/booking?package=${pkg.id}`), 350);

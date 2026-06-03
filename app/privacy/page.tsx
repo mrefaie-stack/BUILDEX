@@ -2,7 +2,7 @@ import { LevelHeader } from '@/components/layout/LevelHeader';
 
 export const metadata = {
   title: 'سياسة الخصوصية',
-  description: 'كيف نتعامل مع بيانات الزوار والعملاء على موقع MilaKnight.'
+  description: 'كيف نتعامل مع بيانات الزوار والعملاء على موقع MILA KNIGHT.'
 };
 
 export default function PrivacyPage() {
@@ -22,7 +22,7 @@ export default function PrivacyPage() {
               في المتصفح (بدون أي بيانات شخصية) لتحسين تجربتك وقياس التفاعل.
             </Section>
             <Section title="كيف نستخدم البيانات؟">
-              نستخدم بياناتك للتواصل معك بخصوص خدمات MilaKnight، وإرسال خطة
+              نستخدم بياناتك للتواصل معك بخصوص خدمات MILA KNIGHT، وإرسال خطة
               مناسبة لشركتك، ولتحسين أداء الموقع. لا نقوم ببيع أو مشاركة بياناتك
               مع أي طرف ثالث لأغراض إعلانية.
             </Section>

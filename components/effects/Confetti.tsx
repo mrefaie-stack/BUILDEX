@@ -13,7 +13,7 @@ interface BurstOptions {
 
 const DEFAULTS: Required<Pick<BurstOptions, 'count' | 'colors' | 'spread' | 'power'>> = {
   count: 90,
-  colors: ['#00D1FF', '#E6B450', '#FFFFFF', '#FF8A3D'],
+  colors: ['#FF3200', '#FF8A3D', '#FFFFFF', '#FF8A3D'],
   spread: 70,
   power: 9
 };

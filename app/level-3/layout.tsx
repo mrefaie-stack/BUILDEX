@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'سجل المعارك — MilaKnight',
+  title: 'سجل المعارك — MILA KNIGHT',
   description:
     'كل مشروع كان معركة. تصفح المعارك التي ربحناها لشركات المقاولات والتشطيبات والعقارات.'
 };

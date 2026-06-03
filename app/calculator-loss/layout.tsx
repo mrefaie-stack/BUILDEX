@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'حاسبة الخسارة الرقمية — MilaKnight',
+  title: 'حاسبة الخسارة الرقمية — MILA KNIGHT',
   description:
     'احسب كم تخسر شركتك شهريًا بسبب ضعف حضورها الرقمي، واستلم تشخيصًا سريعًا لإيقاف هذه الخسارة.'
 };

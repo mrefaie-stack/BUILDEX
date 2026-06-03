@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'باقات MilaKnight — اختر ترسانتك',
+  title: 'باقات MILA KNIGHT — اختر ترسانتك',
   description:
     'باقات مرنة لكل حجم شركة — أو ابنِ ترسانتك المخصصة من خدمات التسويق والمواقع والإعلانات والفيديو.'
 };

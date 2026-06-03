@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'المعركة الأخيرة — MilaKnight',
+  title: 'المعركة الأخيرة — MILA KNIGHT',
   description: 'قرارك الآن يحدد مستقبل شركتك. ابدأ معركتك أو توقف عن الخسارة.'
 };
 

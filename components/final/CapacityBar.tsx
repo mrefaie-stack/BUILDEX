@@ -15,7 +15,7 @@ export function CapacityBar({ name, filled, remainingLabel, tone = 'accent' }: P
       ? 'from-accent-gold to-accent-orange'
       : tone === 'red'
         ? 'from-accent-red to-accent-orange'
-        : 'from-accent to-sky-400';
+        : 'from-accent to-accent-light';
 
   return (
     <div className="surface rounded-xl p-4">

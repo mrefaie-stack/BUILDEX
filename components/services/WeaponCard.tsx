@@ -3,7 +3,6 @@
 import { motion } from 'framer-motion';
 import type { Weapon } from '@/lib/types';
 import { WeaponIcon } from './WeaponIcon';
-import { useArsenalStore } from '@/lib/store';
 import { cn } from '@/lib/utils';
 import { Tilt } from '@/components/effects/Tilt';
 import { playSound } from '@/lib/sound';
@@ -14,9 +13,10 @@ interface Props {
   onOpen: () => void;
 }
 
+// All accents resolve to the MILA KNIGHT orange family for brand cohesion.
 const accentMap: Record<NonNullable<Weapon['accent']>, string> = {
   cyan: 'from-accent/30 to-transparent text-accent',
-  blue: 'from-sky-400/30 to-transparent text-sky-300',
+  blue: 'from-accent/30 to-transparent text-accent',
   gold: 'from-accent-gold/30 to-transparent text-accent-gold',
   red: 'from-accent-red/30 to-transparent text-accent-red',
   green: 'from-accent-green/30 to-transparent text-accent-green',
@@ -24,9 +24,6 @@ const accentMap: Record<NonNullable<Weapon['accent']>, string> = {
 };
 
 export function WeaponCard({ weapon, index, onOpen }: Props) {
-  const selected = useArsenalStore((s) =>
-    s.selectedWeapons.includes(weapon.id)
-  );
   const accent = weapon.accent ?? 'cyan';
 
   return (
@@ -77,10 +74,10 @@ export function WeaponCard({ weapon, index, onOpen }: Props) {
         <span
           className={cn(
             'inline-flex items-center gap-1 font-semibold transition',
-            selected ? 'text-accent-gold' : accentMap[accent].split(' ')[2]
+            accentMap[accent].split(' ')[2]
           )}
         >
-          {selected ? '✓ في الترسانة' : 'عرض التفاصيل ←'}
+          عرض التفاصيل ←
         </span>
       </div>
     </motion.button>

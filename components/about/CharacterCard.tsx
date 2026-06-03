@@ -55,7 +55,7 @@ export function CharacterCard({
             <div className="absolute inset-0 opacity-25"
               style={{
                 background:
-                  'radial-gradient(ellipse at 50% 30%, rgba(0,209,255,0.45), transparent 60%)'
+                  'radial-gradient(ellipse at 50% 30%, rgba(255,50,0,0.45), transparent 60%)'
               }}
             />
             {/* hexagonal frame for initials */}
@@ -63,8 +63,8 @@ export function CharacterCard({
               <svg width="120" height="130" viewBox="0 0 120 130" fill="none">
                 <defs>
                   <linearGradient id={`hex-${name}`} x1="0" y1="0" x2="120" y2="130">
-                    <stop offset="0" stopColor="#FFE9B0" />
-                    <stop offset="1" stopColor="#8C5A12" />
+                    <stop offset="0" stopColor="#FFB070" />
+                    <stop offset="1" stopColor="#C82D08" />
                   </linearGradient>
                 </defs>
                 <polygon
