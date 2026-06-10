@@ -44,7 +44,7 @@ export default function Level4() {
             >
               <div className="chip chip-red mb-3">CRITICAL_QUESTION</div>
               <h2 className="font-display text-3xl md:text-4xl text-gradient-red leading-tight">
-                هل ستستمر في خسارة العملاء؟
+                كم عميل خسرته هذا الشهر لمنافس أقل كفاءة منك؟
               </h2>
               <p className="mt-4 text-ink-muted leading-relaxed">
                 عندما تنتهي الأماكن — لا حجز ولا استثناء. من تأخر ينتظر 3 أشهر

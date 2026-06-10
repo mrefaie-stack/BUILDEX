@@ -62,20 +62,20 @@ const ACHIEVEMENTS = [
   {
     icon: <span>🏆</span>,
     number: '01',
-    title: '+50 معركة منتصرة',
-    body: 'مشاريع منفذة بنتائج موثقة عبر المحافظات السورية.'
+    title: '+50 معركة',
+    body: 'من ظهور أول في جوجل إلى تضاعف الاستفسارات — ستجد كل قصة في Level 2.'
   },
   {
     icon: <span>$</span>,
     number: '02',
     title: 'مليون دولار',
-    body: 'إجمالي قيمة الفرص التي حققناها لعملائنا.'
+    body: 'قيمة العقود والمشاريع التي فتحتها خدماتنا لعملائنا.'
   },
   {
     icon: <span>🌍</span>,
     number: '03',
     title: '3 دول',
-    body: 'نخدم عملاء في سوريا، السعودية، والإمارات.'
+    body: 'معركتك لا تعرف حدوداً — وكذلك فريقنا.'
   }
 ];
 
@@ -87,7 +87,7 @@ export default function Level1() {
       <LevelHeader
         level="LEVEL 01 / من نحن"
         title="قصة البطل"
-        subtitle="لسنا وكالة تقليدية. نحن فريق يدخل معك معركة السيطرة الرقمية — من اللحظة الأولى حتى تحويل شركتك إلى قوة لا يمكن تجاوزها."
+        subtitle="ثلاث سنوات. خمسون مشروعاً. قرار واحد: الأفضل يستحق أن يُرى."
       />
 
       {/* Vertical numerals + scenes */}
@@ -103,8 +103,9 @@ export default function Level1() {
             >
               <p className="text-ink-muted leading-relaxed text-base md:text-lg max-w-xl">
                 من قلب سوريا الجديدة، رأينا الشركات تعمل بصمت بينما يأخذ
-                المنافسون مكانها رقميًا. قررنا أن نقدم سلاحًا مختلفًا: تجربة
-                استراتيجية، تنفيذ سريع، ونتائج قابلة للقياس.
+                المنافسون مكانها رقميًا. فأسّسنا الفرع الثالث لـ MILA KNIGHT
+                بعد فرعي الإمارات والسعودية — لا لنبيع خدمات، بل لنضمن أن
+                أفضل الشركات هي التي يراها السوق أولاً.
               </p>
               <div className="mt-6 flex items-center gap-4">
                 <ScrollIndicator />
@@ -126,7 +127,7 @@ export default function Level1() {
           num="02"
           eyebrow="Scene 02"
           title="فريق الأبطال"
-          sub="قادة مهمتنا لصناعة الفارق"
+          sub="خبرات مختلفة، معركة واحدة."
         >
           <motion.p
             initial={{ opacity: 0 }}
@@ -135,8 +136,8 @@ export default function Level1() {
             transition={{ duration: 0.6 }}
             className="text-ink-muted leading-relaxed text-base mb-8 max-w-xl"
           >
-            فريق متكامل من الخبراء المهنيين بعقلين خبرة وشغف لتحقيق رؤيتك
-            وكشف نقاط قوتك واستثمارها.
+            بين الاستراتيجية والتنفيذ فريق واحد — ما تحتاج تكرّر نفسك لعشرة
+            أشخاص.
           </motion.p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {TEAM.map((t, i) => (
@@ -154,7 +155,12 @@ export default function Level1() {
         </Scene>
 
         {/* Scene 03 — achievements */}
-        <Scene num="03" eyebrow="Scene 03" title="إنجازاتنا" sub="محطات نعتز بها">
+        <Scene
+          num="03"
+          eyebrow="Scene 03"
+          title="إنجازاتنا"
+          sub="أرقام حقيقية، لشركات كانت مكانك."
+        >
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -162,7 +168,8 @@ export default function Level1() {
             transition={{ duration: 0.6 }}
             className="text-ink-muted leading-relaxed text-base mb-12 max-w-xl"
           >
-            كل إنجاز هنا خطوة جديدة نحو مستقبل أكثر تأثيرًا واستدامة.
+            ما تراه هنا ليس تسويقًا — نتائج موثقة من مشاريع حقيقية. شركتك
+            القادمة.
           </motion.p>
           <div className="font-mono text-[10px] tracking-[0.5em] text-accent-gold/70 text-center mb-8">
             ━━━━ ACHIEVEMENTS UNLOCKED ━━━━
@@ -188,11 +195,10 @@ export default function Level1() {
               NEXT_PHASE
             </div>
             <h3 className="font-display text-2xl md:text-4xl text-gradient mb-3">
-              جاهز تشوف إنجازاتنا؟
+              الأرقام قُلناها. الآن شوف كيف تحقّقت.
             </h3>
             <p className="text-ink-muted max-w-xl mx-auto mb-6">
-              قبل ما تختار، شوف المعارك اللي ربحناها. اعبر إلى Level 2 لقراءة
-              سجل المعارك.
+              اعبر إلى Level 2 لقراءة سجل المعارك.
             </p>
             <Magnetic strength={0.25} radius={120}>
               <Link

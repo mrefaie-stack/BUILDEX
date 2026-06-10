@@ -11,8 +11,8 @@ export default function BookingPage() {
     <div className="relative">
       <LevelHeader
         level="LEVEL 05 / الحجز"
-        title="ابدأ معركتك الآن"
-        subtitle="املأ البيانات واختر موعدًا للجلسة. سيصلك تأكيد على هاتفك."
+        title="45 دقيقة قد تغيّر مسار شركتك"
+        subtitle="لا التزام، لا ضغط. فقط جلسة تشخيص حقيقية لفهم وضع شركتك — والقرار يبقى لك."
       />
 
       <section className="section">
@@ -29,7 +29,9 @@ export default function BookingPage() {
               </div>
               <ul className="space-y-3 text-sm text-ink">
                 <Item>تواصل مباشر مع قائد الفريق خلال 24 ساعة</Item>
-                <Item>جلسة تشخيص مجانية لمدة 45 دقيقة</Item>
+                <Item>
+                  تشخيص كامل لحضورك الرقمي الحالي ومقارنته بأبرز منافسيك
+                </Item>
                 <Item>عرض مخصص بناءً على ترسانتك</Item>
                 <Item>التزام كامل بالخصوصية والسرية</Item>
               </ul>

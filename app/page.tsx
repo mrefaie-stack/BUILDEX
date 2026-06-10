@@ -115,7 +115,9 @@ export default function GatePage() {
               '0 0 24px rgba(255,50,0,0.12), 0 1px 0 rgba(0,0,0,0.6)'
           }}
         >
-          <span className="text-gradient">شركتك جاهزة تنبني رقميًا؟</span>
+          <span className="text-gradient">
+            في السوق، الأوضح يكسب العميل — لا الأمهر.
+          </span>
         </motion.h1>
 
         <motion.p
@@ -124,7 +126,8 @@ export default function GatePage() {
           transition={{ duration: 0.9, delay: 0.45 }}
           className="mt-6 mx-auto max-w-2xl text-base md:text-xl text-ink-muted leading-relaxed"
         >
-          اختيارك الآن يحدد هل ستقود السوق… أم تترك عملاءك يذهبون للمنافسين.
+          أنت تبني أفضل المشاريع. لكن إن لم يرَك أحد، يأخذ منافسك مكانك.
+          القرار يبدأ من هنا.
         </motion.p>
 
         <motion.div
@@ -139,7 +142,7 @@ export default function GatePage() {
               onMouseEnter={() => playSound('hover')}
               className="btn-neon group text-base md:text-lg"
             >
-              <span>نعم، أريد أن أسيطر على السوق</span>
+              <span>دع السوق يراك</span>
               <ArrowSword />
             </button>
           </Magnetic>
@@ -149,7 +152,7 @@ export default function GatePage() {
               onMouseEnter={() => playSound('hover')}
               className="btn-neon-dim text-base md:text-lg"
             >
-              لا، أنا مرتاح بخسارة العملاء
+              غير مقتنع؟ احسب كم تخسر
             </button>
           </Magnetic>
         </motion.div>

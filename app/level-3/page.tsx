@@ -38,7 +38,7 @@ export default function Level3() {
     <div className="relative">
       <LevelHeader
         level="LEVEL 03 / متجر الأسلحة"
-        title="الخدمات و اختيار ترسانتك"
+        title="أسلحة المعركة"
         subtitle="كل خدمة = سلاح بهدف ومدة ونتيجة. تعرّف على الأسلحة بالتفصيل، ثم اختر باقة جاهزة أو ابنِ ترسانتك الخاصة سلاحًا بسلاح وشاهد التكلفة الشهرية لحظيًا."
         accent="gold"
       />
